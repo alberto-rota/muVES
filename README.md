@@ -1,10 +1,10 @@
 # muVES
 -----------------------------------------------------------------------------------------------
 ###### For a single image analysis open and run the script "muVES_3D". A file selection window
-###### will open, from which you will select a file of supported type [.oib, .n2d]. When the analysis
-###### is complete, the results will be saved in the same folder of the selected files: these are
-###### a .mat file with all the results (its contents are covered in the file "muVES legend.txt"),
-###### a flat 2D projection, and the .pts files to be used for the CFD analysis.
+will open, from which you will select a file of supported type [.oib, .n2d]. When the analysis
+is complete, the results will be saved in the same folder of the selected files: these are
+a .mat file with all the results (its contents are covered in the file "muVES legend.txt"),
+a flat 2D projection, and the .pts files to be used for the CFD analysis.
 -----------------------------------------------------------------------------------------------
 ###### Prior to running the script, please specify all the analysis settings in the file 
 ###### "muVES settings.txt", most importantly check the pixel resolution in micrometers/pixel.
