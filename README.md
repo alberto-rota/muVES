@@ -3,10 +3,15 @@
 *Algorithm to analyze 2D and 3D images of microvascular networks (Politecnico di Milano)*
 
 **Active contributors**: Alberto Rota, Martina Senesi, Adelaide Stucchi, Irene Venturelli
+
 **Supervisor**: Luca Possenti
+
 **Past contributors**: 
+
 **Copyright**: Alberto Rota, Luca Possenti
+
 **Mailto**: <alberto2.rota@mail.polimi.it> , <luca.possenti@polimi.it>
+
 
 -------------------------------------------------------
 Software requirements
