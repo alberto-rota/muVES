@@ -74,7 +74,7 @@ smoothing_repeat = str2double(pds{2});  % [POSITIVE INTEGER SCALAR]
 % 'rad_precision' is the number of equally spaced sections obtained on
 % each branch for the calculation of the radius and lateral area
 pds = strsplit(fgetl(fid),":");
-rad_precision = str2double(pds{2});   % [POSITIVE INTEGER SCALAR]
+rag_precision = str2double(pds{2});   % [POSITIVE INTEGER SCALAR]
 % [INCREASE for ACCURACY, DECREASE for PERFORMACE]
 % ========================================================================%
 % Set 'print_pts' to true or false if the .pts file has to be
