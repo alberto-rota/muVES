@@ -1,4 +1,4 @@
-# muVES
+# µVES
 ###
 *Algorithm to analyze 2D and 3D images of microvascular networks (Politecnico di Milano)*
 
@@ -17,7 +17,8 @@
 Software requirements
 -------------------------------------------------------
 µVES has been tested on Matlab2020a.
-Matlab2019a or further version required.
+Matlab2020a or further version required, with *Image Processing Toolbox*, *Curve Fitting
+Toolbox*, *Computer Vision Toolbox* and *Image Processing Toolbox*
 
 -------------------------------------------------------
 Setting parameters
