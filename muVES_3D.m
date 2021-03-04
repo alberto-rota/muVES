@@ -202,7 +202,7 @@ clear V s slh newvol
 tic
 
 % INITIALIZING SEGMENTATIN WITH DEEP LEARNING
-load mVN_DLN;
+% load mVN_DLN;
 if exist('mVN_DLN','var')
     disp("> Performing segmentation - Deep Learning ");
     
@@ -653,6 +653,7 @@ for b=1:tot_branches
     r = NaN*ones(rad_precision,1);
     a = r;
     e = r;
+    o = r;
     k = 1;
     
     for j=J
@@ -694,16 +695,18 @@ for b=1:tot_branches
             % LATERAL SURFACE AREA
             a(k)= 2*pi*r(k)*branchdata.Len(b)/numel(J);
             
-            % ECCENTRICITY
-            currecc = regionprops(truesec,'MajorAxisLength','MinorAxisLength');
+            % ECCENTRICITY and ORIENTATION
+            currecc = regionprops(truesec,'MajorAxisLength','MinorAxisLength','Orientation');
             if ~isempty(currecc)
                 e(k) = sqrt(1-currecc.MinorAxisLength^2/currecc.MajorAxisLength^2);
+                o(k) = currecc.Orientation;
             end
         k = k+1;
     end
     branchdata.Rad(b) = mean(r,'omitnan');
     branchdata.Alat(b) = mean(a,'omitnan');
     branchdata.Eccent(b) = mean(e,'omitnan');
+    branchdata.Orientat(b) = mean(o,'omitnan');
     
     % Approximating the vessel hydraulic resistance
     mu = 1e-3; % Viscosity
