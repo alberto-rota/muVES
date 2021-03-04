@@ -1,0 +1,53 @@
+Pixel Density in the X direction    : 2
+Pixel Density in the Y direction    : 2
+Pixel Density in the Z direction    : 5
+Downsampling Factor                 : 2
+Smoothing Repetitions               : 1
+Radius Precision                    : 3
+Print PTS files [0 False/1 True]    : 1
+Points per Branch                   : 12
+Edge Border                         : 0.05
+Length Threshold                    : 5
+Append to path                      : 
+
+PIXELD DENSITY
+-[POSITIVE REAL INTEGER] The spatial resolution in micrometers per pixel. 
+ The 2D analysis ignores the Z parameter
+
+DOWNSAMPLING FACTOR
+-[POSITIVE INTEGER SCALAR] The number of voxels in the 3D matrix gets reduced of a factor
+ 2^downfactor, keeping 1-every-downfactor voxels in each dimensions.
+ 'downfactor = 1' keeps the matrix unaltered, 'downfactor = 2' keeps 1
+ voxel every 2.
+ <INCREASE for PERFORMANCE, DECREASE for ACCURACY>
+
+SMOOTHING REPETITIONS
+-[POSITIVE INTEGER SCALAR] indicates how many consecutive times a smoothing
+ operation is performed on the binary matrix.
+ The higher this value is, the more times the matrix is ​​"refined", making it
+ clearer and decreasing the skeletonization errors; at the same time some
+ information is lost(especially on thin vessels)
+
+RADIUS PRECISION
+-[POSITIVE INTEGER SCALAR] is the number of equally spaced sections obtained on
+ each branch for the calculation of the radius and lateral area
+ <INCREASE for ACCURACY, DECREASE for PERFORMACE>
+
+PRINT PTS FILES
+-[LOGICAL SCALAR] True prints the .pts file, False does not print it
+
+POINTS PER BRANCH
+-[INTEGER] is the number of voxels in eanch branch in
+ the skeleton provided to the CFD simulation
+
+EDGE BORDER
+-[FLOAT from 0 to 1] is ratio between the edge width and the
+ total width of the image. 'edge_border = 0.05' means that 5% of the total
+ width is considered edge (used to apply the boundary conditions)
+
+LENGTH THRESHOLD
+-[POSITIVE REAL SCALAR] is the minimum length for a branch to be kept in the skeleton
+
+APPEND TO PATH
+-[STRING] specifies a string to be appended to the .mat with the results. If nothing 
+ needs to be appended leave empty
