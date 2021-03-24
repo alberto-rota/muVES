@@ -51,4 +51,11 @@ from the analysis. Specify (in the first lines of the script) which plots/graphs
 want to be shown and then run the script. From the file selection window that opens, please 
 select the .mat file that you want to visualize.
 
+-------------------------------------------------------
+Analyzing flowrate
+-------------------------------------------------------
+Flowrate in each vessels can be computed by defining pressure BC (inlet pressure). 
+Outlet pressure is equal to 0. Simmetry condition is defined as null flow rate.
+Define the BC in the script, and run it. Choose the .mat file resulting from the previous anlysis.
+
 
