@@ -141,12 +141,19 @@ end
 
 %% Solving
 X = A\B;
+flowrate=X(end-totalVessels+1:end); %ul/s
+pressure=X(1:end-totalVessels); %Pa
+
+%% Computing velocity
+radius = mvn.branchdata.Rad;
+velocities = flowrate./(pi.*radius.^2)*1e-9;
 
 %% Plotting
 % Flowrate
 minQ = min(abs(X(end-totalVessels+1:end)));
 maxQ = max(abs(X(end-totalVessels+1:end)));
 figure
+title('Flow rate (\mul/s)')
 c=colormap(jet);
 hold on
 for b=1:totalVessels
@@ -158,10 +165,27 @@ hold off
 colorbar
 caxis([minQ maxQ])
 
+% velocity
+minV = min(abs(velocities));
+maxV = max(abs(velocities));
+figure
+title('Velocity (m/s)')
+c=colormap(jet);
+hold on
+for b=1:totalVessels
+    coord = [mvn.branchdata.From(b,:); mvn.branchdata.To(b,:)];
+    col = ceil((abs(velocities(b))-minV)/(maxV-minV)*255)+1;
+    plot3(coord(:,1),coord(:,2),coord(:,3),'Color',c(col,:),'LineWidth',7);
+end
+hold off
+colorbar
+caxis([minV maxV])
+
 % Pressure
 minP = min(abs(X(1:end-totalVessels)));
 maxP = max(abs(X(1:end-totalVessels)));
 figure
+title('Pressure (Pa)')
 c=colormap(jet);
 hold on
 for b=1:totalVessels
@@ -186,7 +210,5 @@ colorbar
 caxis([minP maxP])
 
 %% Saving
-flowrate=X(end-totalVessels:end);
-pressure=X(1:end-totalVessels);
 str = strcat('pressureAndVelocity_',name);
 save(str,'flowrate','pressure')
