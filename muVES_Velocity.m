@@ -211,4 +211,4 @@ caxis([minP maxP])
 
 %% Saving
 str = strcat('pressureAndVelocity_',name);
-save(str,'flowrate','pressure')
+save(str,'flowrate','pressure','velocities')
