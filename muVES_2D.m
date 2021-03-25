@@ -113,7 +113,7 @@ if ~check_req(req)
 end
 tic
 switch extension
-    case {'.oib', '.n2d'}
+    case {'.oib', '.n2d', '.tif'}
         pathtoimg = char(pathtoimg);
         disp(strcat("Processing: ",string(pathtoimg)));
         try
