@@ -210,5 +210,5 @@ colorbar
 caxis([minP maxP])
 
 %% Saving
-str = strcat('pressureAndVelocity_',name);
+str = strcat(path,'pressureAndVelocity_',name);
 save(str,'flowrate','pressure','velocities')
