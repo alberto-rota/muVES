@@ -1,11 +1,12 @@
 % =============================== µVES ================================== %
-% Copyrights © 2021     Alberto Rota
+% Copyrights © 2021     Alberto Rota, Luca Possenti
 %
 % For informations please contact:
 %   alberto2.rota@mail.polimi.it
-%   alberto_rota@outlook.com
+%   or alberto_rota@outlook.com
+%   luca.possenti@mail.polimi.it
 % ========================================================================%
-%% VISUALIZATION TOOL FOR MICROVASCULAR NETWORKS ANALYZED WITH "NOME"
+%% VISUALIZATION TOOL FOR MICROVASCULAR NETWORKS ANALYZED WITH muVES
 % Press "Run" to choose which network to visualize. 
 [name,path] = uigetfile("*.mat");
 load(strcat(path,name));

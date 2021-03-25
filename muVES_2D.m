@@ -1,9 +1,10 @@
 % =============================== µVES ================================== %
-% Copyrights © 2021     Alberto Rota
+% Copyrights © 2021     Alberto Rota, Luca Possenti
 %
 % For informations please contact:
 %   alberto2.rota@mail.polimi.it
-%   alberto_rota@outlook.com
+%   or alberto_rota@outlook.com
+%   luca.possenti@mail.polimi.it
 % ========================================================================%
 % SPECIFY THE SETTINGS IN THE "muVES settings.txt" FILE 
 % ======================================================================= %

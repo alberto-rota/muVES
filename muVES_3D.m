@@ -1,10 +1,11 @@
 % =============================== µVES ================================== %
-% Copyrights © 2021     Alberto Rota
+% Copyrights © 2021     Alberto Rota, Luca Possenti
 %
 % For informations please contact:
 %   alberto2.rota@mail.polimi.it
-%   alberto_rota@outlook.com
-% ======================================================================= %
+%   or alberto_rota@outlook.com
+%   luca.possenti@mail.polimi.it
+% ========================================================================%
 % SPECIFY THE SETTINGS IN THE "muVES settings.txt" FILE 
 % ======================================================================= %
 %% SETUP AND IMAGE LOADING
@@ -107,7 +108,6 @@ try
 %-------------------------------------------------------------------------%
     img_3d = bfOpen3DVolume(char(strcat(pathtoimg,extension)));
     vol = img_3d{1,1}{1,1};
-    vol = mat2gray(vol)*1000;
     splpath = strsplit(img_3d{1}{2},".");
     pathtoimg = splpath(1);
     extension = strcat(".",splpath(2));
@@ -116,7 +116,7 @@ catch
 end
 % ========================================================================%
 % SPECIFY HERE THE ADDITIONAL OPERATION THAT HAVE TO BE PERFORMED FOR
-% SPECIFIC FILE EXTENSION. The final volume must be named 'vol'
+% SPECIFIC FILE EXTENSION. The final data must be named 'vol'
 switch extension
     case {'.oib'}
         
@@ -202,7 +202,7 @@ clear V s slh newvol
 tic
 
 % INITIALIZING SEGMENTATIN WITH DEEP LEARNING
-% load mVN_DLN;
+load mVN_DLN;
 if exist('mVN_DLN','var')
     disp("> Performing segmentation - Deep Learning ");
     
