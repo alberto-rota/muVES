@@ -201,9 +201,10 @@ clear V s slh newvol
 % "load mVN_DLN" in the following lines of code
 tic
 
-% INITIALIZING SEGMENTATIN WITH DEEP LEARNING
+% INITIALIZING SEGMENTATION WITH DEEP LEARNING
 load mVN_DLN;
 if exist('mVN_DLN','var')
+%     vol = mat2gray(vol);
     disp("> Performing segmentation - Deep Learning ");
     
     % The image is scaled to 384x384x16 to be best interfaced with the
@@ -234,10 +235,64 @@ if exist('mVN_DLN','var')
     end
     bw = bw > 0.5;
     
-    try
-        mvn.info.chrono = [mvn.info.chrono; {"Segmentation - Deep Learning",toc}];
-    catch
+    % Checking a possible missegmentation with DL. If such, segmentation is
+    % performed again with AC
+    if nnz(bw)/numel(bw) < 0.05
+        clear bw;
+        warning("Bad segmentation with DL. Re-Segmenting with AC");
+        disp("> Reperforming segmentation - ActiveContour ");
+        mask = zeros(size(vol));
+        
+        for i=1:smoothing_repeat
+            vol = smooth3(vol);
+        end
+        
+        for seedLevel = 1:size(vol,3)
+            % The mask is initialized by comparing all pixels in the brighter layer
+            % with a threshold value, obtaining a binary image that is the
+            % 2D segmentation (inaccurate) of this layer.
+            seed = vol(:,:,seedLevel) > mean(vol,'all');
+            % The mask gets thickened by 10 pixels and then furtherly refined
+            % with a moving average 2D filter of arbitrary size of 10x10.
+            seed_thick = bwmorph(seed, 'thicken', 10);
+            N = 3;
+            kernel = ones(N, N) / N^2;
+            seed_thick = conv2(double(seed_thick), kernel, 'same');
+            
+            % The result of the moving average is of type double.In order to
+            % reconvert it to type 'logical' it must be compared with a
+            % threshold value that depends on convolution kernel size
+            seed_thick = seed_thick > N/10;
+            mask(:,:,seedLevel) = seed_thick;
+        end
+        
+        try
+            mvn.info.chrono = [mvn.info.chrono; {"Mask Creation",toc}];
+        catch
+        end
+        
+        % Actual activecontour segmentation
+%-------------------------------------------------------------------------%
+% Chan T., Vese L. (1999)
+% "An Active Contour Model without Edges"
+% In: Nielsen M., Johansen P., Olsen O.F., Weickert J. (eds) Scale-Space
+% % Theories in Computer Vision. Scale-Space 1999. Lecture Notes in Computer
+% Science, vol 1682. Springer, Berlin, Heidelberg.
+% https://doi.org/10.1007/3-540-48236-9_13
+%-------------------------------------------------------------------------%
+        bw = activecontour(vol,mask,100);
+        
+        try
+            mvn.info.chrono = [mvn.info.chrono; {"ReSegmentation - ActiveContour",toc}];
+        catch
+        end
+    else
+        try
+            mvn.info.chrono = [mvn.info.chrono; {"Segmentation - Deep Learning",toc}];
+        catch
+        end
     end
+    
 else
     % SEGMENTATION WITH ACTIVECONTOUR
     % The mask used is the binary image of the layer with the overall higher
