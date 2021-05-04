@@ -564,13 +564,13 @@ G.Nodes.deg = degree(G);
         end
         
         if flag_bpST == 0
-            if s(i,1)/w > (1-edge_border)
+            if s(i,1)/h > (1-edge_border)
                 branchdata.CatFr(i) = "DIR 1";
-            elseif s(i,2)/h > (1-edge_border)
+            elseif s(i,2)/w > (1-edge_border)
                 branchdata.CatFr(i) = "DIR 2";
-            elseif s(i,1)/w < edge_border
+            elseif s(i,1)/h < edge_border
                 branchdata.CatFr(i) = "DIR 3";
-            elseif s(i,2)/h < edge_border
+            elseif s(i,2)/w < edge_border
                 branchdata.CatFr(i) = "DIR 4";
             else
                 branchdata.CatFr(i) = "MIX";
@@ -586,13 +586,13 @@ G.Nodes.deg = degree(G);
         end
         
         if flag_bpEN == 0
-            if e(i,1)/w > (1-edge_border)
+            if e(i,1)/h > (1-edge_border)
                 branchdata.CatTo(i) = "DIR 1";
-            elseif e(i,2)/h > (1-edge_border)
+            elseif e(i,2)/w > (1-edge_border)
                 branchdata.CatTo(i) = "DIR 2";
-            elseif e(i,1)/w < edge_border
+            elseif e(i,1)/h < edge_border
                 branchdata.CatTo(i) = "DIR 3";
-            elseif e(i,2)/h < edge_border
+            elseif e(i,2)/w < edge_border
                 branchdata.CatTo(i) = "DIR 4";
             else
                 branchdata.CatTo(i) = "MIX";
