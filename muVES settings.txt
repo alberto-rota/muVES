@@ -1,13 +1,13 @@
-Pixel Density in the X direction    : 2
-Pixel Density in the Y direction    : 2
+Pixel Density in the X direction    : 1.98
+Pixel Density in the Y direction    : 1.98
 Pixel Density in the Z direction    : 5
-Downsampling Factor                 : 2
-Smoothing Repetitions               : 1
-Radius Precision                    : 3
-Print PTS files [0 False/1 True]    : 1
+Downsampling Factor                 : 5
+Smoothing Repetitions               : 2
+Radius Precision                    : 2
+Print PTS files [0 False/1 True]    : 0
 Points per Branch                   : 12
 Edge Border                         : 0.05
-Length Threshold                    : 5
+Length Threshold                    : 10
 Append to path                      : 
 
 PIXELD DENSITY

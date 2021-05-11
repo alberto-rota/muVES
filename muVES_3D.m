@@ -21,8 +21,8 @@ if nargin == 0
 % correct, a window for file selection will be opened.
 % Example:      pathtoimg = 'C:\...\...\myfolder\myfile';
 %               extension = '.oib';
-pathtoimg = "";
-extension = "";
+pathtoimg = "C:\Users\alber\Documents\MATLAB\muVES-main\mosaic";
+extension = ".tif";
 else
     splpath = strsplit(varargin{1},".");
     pathtoimg = splpath(1);
@@ -202,7 +202,7 @@ clear V s slh newvol
 tic
 
 % INITIALIZING SEGMENTATION WITH DEEP LEARNING
-load mVN_DLN;
+% load mVN_DLN;
 if exist('mVN_DLN','var')
 %     vol = mat2gray(vol);
     disp("> Performing segmentation - Deep Learning ");
@@ -452,6 +452,8 @@ disp("> Interpolating the branches ");
 %-------------------------------------------------------------------------%
 [adj, node, link] = Skel2Graph3D(sk,lung_thr);
 
+[h,w,l] = size(mvn.bw);
+
 % Il numero di branches è dato dalla quantià di elementi di 'link'
 tot_branches = numel(link);
 
@@ -662,7 +664,7 @@ G.Nodes.deg = degree(G);
     end
     tot_branches = size(branchdata,1);
 end
-
+mvn.branchdata = branchdata;
 try
     mvn.info.chrono = [mvn.info.chrono; {"Node classification",toc}];
 catch
@@ -685,6 +687,8 @@ clear adj appCat appPoint b cond e flag_bpEN flag_bpST from G i idx idxx ...
 %% MORPHOLOGICAL MEASUREMENTS
 tic
 disp("> Morphological measurements ");
+displine = 0;
+errors = 0;
 for b=1:tot_branches
     % LENGTH
     xyzpath = [branchdata.xPath{b};branchdata.yPath{b};branchdata.zPath{b}];
@@ -741,11 +745,8 @@ for b=1:tot_branches
             if r(k)==0
                 r(k) = 1;
             end
-        catch ex
-            warning(['Error slicing the vessel. The calculation will be '...
-                'performed with less precision than what has been specified '...
-                'in "rag_precision"']);
-            warning(ex.message);
+        catch 
+            errors = errors+1;
         end
             % LATERAL SURFACE AREA
             a(k)= 2*pi*r(k)*branchdata.Len(b)/numel(J);
@@ -770,6 +771,15 @@ for b=1:tot_branches
     % Goodness condition of the vessel: Length > Radius*3 (arbitrary)
     branchdata.isGood(b) = branchdata.Len(b) > branchdata.Rad(b)*3;
     
+    fprintf(repmat('\b',1,displine))
+    displine = fprintf(strcat(string(b),"/",string(tot_branches)," branches analyzed"));
+    
+end
+
+fprintf(repmat('\b',1,displine))
+if errors>0
+   disp(strcat(string(errors),...
+       " vessels had to be sliced with less precision than specified in 'radius_precision'")); 
 end
 
 % Scaling the metrics based on the downsampling and conversion to
@@ -788,7 +798,7 @@ end
 
 clear a area b basep c currecc d e geo intp J k len mu nextp normal r skp...
     sl theta thetanorm truesec v1 xyzpath xyzdir xs ys zs x_skp y_skp i j n...
-    tmax
+    tmax displine
 
 %% PCR ANALYSIS
 tic

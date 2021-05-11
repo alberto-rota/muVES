@@ -16,16 +16,16 @@ flat_img              = 0;
 slices                = 0;  % --> Only for 3D data
 segmentation          = 1;  % --> Segmentation and Skeletonization are on 
 skeleton              = 1;  %     the same image for 2D data, set either to
-interpolation         = 0;  %     1 and both will bw shown
+interpolation         = 1;  %     1 and both will bw shown
 graph                 = 1;
-histograms            = 0;
+histograms            = 1;
 radius                = 1;
 lengthh               = 1;
 tortuosity            = 1;
 pts_classification    = 0;
 %==========================================================================%
 if numel(size(mvn.bw))==3
-    mVN_3D_visualize()
+    muVES_3D_visualize()
 else
-    mVN_2D_visualize()
+    muVES_2D_visualize()
 end
