@@ -20,8 +20,8 @@ if nargin == 0
 % correct, a window for file selection will be opened.
 % Example:      pathtoimg = 'C:\...\...\myfolder\myfile';
 %               extension = '.oib';
-pathtoimg = "";
-extension = "";
+pathtoimg = "C:\Users\alber\Documents\MATLAB\muVES-main\mosaic2D";
+extension = ".tif";
 
     try
         img = imread(strcat(pathtoimg,extension));
@@ -166,7 +166,8 @@ img = img(1:downfactor:end, 1:downfactor:end, 1:downfactor:end);
 tic
 disp("> Enhancing the image and performing binarization ");
 img_mf = medfilt2(img, [10 10]);  % Median filtering
-img_en = imadjust(img_mf, [0;1], [0;1], 0.5); % Dark pixel contrast enhancement
+gamma = 0.5;
+img_en = imadjust(img_mf, [0;1], [0;1], gamma); % Dark pixel contrast enhancement
 bw = imbinarize(img_en,0.5); %bw = medfilt2(bw, [5 5]);% Removes salt&pepper 
 bw = bwmorph(bw,'spur');
 bw = bwmorph(bw,'clean');
@@ -471,6 +472,8 @@ clear non_lab ph x_from y_from z_from x_to y_to z_to
 %% MORPHOLOGICAL MEASUREMENTS
 tic
 disp("> Morphological Measurements ");
+displine = 0;
+errors = 0;
 % Per il calcolo della lunghezza dei branches, si lavora sullo scheletro
 % discreto. In particolare, si valuta il numero di voxel adiacenti in
 % orizzontale o verticale e il numero di voxel adiacenti in diagonale. La
@@ -548,7 +551,7 @@ for b=1:tot_branches
                 (max(yslice(truesec))-min(yslice(truesec))).^2)/2;
 %             fnplt(branchdata.Interp{b},'b',2);
 %             scatter(xslice(truesec),yslice(truesec),'.r');
-            text(mean(xslice(truesec)),mean(yslice(truesec)),string(round(r(k))));
+%             text(mean(xslice(truesec)),mean(yslice(truesec)),string(round(r(k))));
             close;
             if r(k)==0
                 r(k) = 1;
@@ -565,8 +568,11 @@ for b=1:tot_branches
 
     branchdata.Res(b) = 8*mu*branchdata.Len(b)/(pi*branchdata.Rad(b)^4);
     branchdata.check(b) = branchdata.Len(b) > branchdata.Rad(b)*3;
-
+    
+    fprintf(repmat('\b',1,displine))
+    displine = fprintf(strcat(string(b),"/",string(tot_branches)," branches analyzed"));
 end
+fprintf(repmat('\b',1,displine))
 % Scalamento delle metriche in funzione della densità in pixel e del
 % downsampling
 branchdata.Rad = branchdata.Rad*pxdens(1)*downfactor;
@@ -669,7 +675,7 @@ disp("> Saving the results ");
 %   salienti della rete
 mvn.branchdata = branchdata;
 bwd = bwdist(~bw);
-bwdsk = bwd; bwdsk(sk==0) = 0;
+bwdsk = bwd; bwdsk(imrotate(sk,90)==0) = 0;
 mvn.mRad_REAVER = mean(bwdsk(bwdsk>0),'all')*pxdens(1);
 mvn.mRad = mean(branchdata.Rad(:),'omitnan');
 mvn.mLen = mean(branchdata.Len(:),'omitnan');

@@ -70,7 +70,7 @@ if graph
         mvn.skel.graph.Nodes.y,'ZData',mvn.skel.graph.Nodes.z);
     title('Graph');
     try
-        for sn=1:max(mvn.branchdata.subN)
+        for sn=1:max(mvn.skel.graph.Nodes.subN)
             highlight(ph,mvn.skel.graph.Nodes.subN == sn,'NodeColor',abs(rand([1 3])),...
                         'MarkerSize',4);
         end

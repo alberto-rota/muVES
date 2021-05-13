@@ -53,9 +53,12 @@ if graph
     ph = plot(mvn.skel.graph,'XData',mvn.skel.graph.Nodes.x,'YData',mvn.skel.graph.Nodes.y);
     title('Graph');
     axis equal;
-    for sn=1:max(mvn.branchdata.subN)
-        highlight(ph,mvn.skel.graph.Nodes.subN == sn,'NodeColor',abs(rand([1 3])),...
-            'MarkerSize',4);
+    try
+        for sn=1:max(mvn.skel.graph.Nodes.subN)
+            highlight(ph,mvn.skel.graph.Nodes.subN == sn,'NodeColor',abs(rand([1 3])),...
+                        'MarkerSize',4);
+        end
+    catch 
     end
 end
 %% PTS CLASSIFICATION
