@@ -652,7 +652,7 @@ fprintf(FID,'BEGIN_LIST\n');
 % quantità per cui erano stati normalizzate le coordinate dei punti dello
 % scheletro
 for i= 1:tot_branches
-    fprintf(FID,'%f\n', r(i)/max([w,h]));
+    fprintf(FID,'%f\n', r(i)/max([w,h])/mean(pxdens(1)/pxdens(2))*downfactor);
 end
 fprintf(FID,'END_LIST\n');
 fclose(FID);
