@@ -864,7 +864,7 @@ if print_pts
     r = branchdata.Rad;
     fprintf(FID,'BEGIN_LIST\n');
     for i= 1:tot_branches
-        fprintf(FID,'%f\n', r(i)/max([w,h,l]));
+        fprintf(FID,'%f\n', r(i)/max([w,h,l])/mean(pxdens(1)/pxdens(2))*downfactor);
     end
     fprintf(FID,'END_LIST\n');
     fclose(FID);
