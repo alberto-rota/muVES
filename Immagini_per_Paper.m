@@ -1,13 +1,17 @@
+
 %% istogramma raggi validazione 2d
 blue = [0, 0.4470, 0.7410];
 orange = [0.8500, 0.3250, 0.0980];
 green = [0.4660, 0.6740, 0.1880];
 
+% !!!!!!!!!!!Cambiare questo path!!!!!!!!!!!!!!!!!
+MOTHER_FOLDER = "C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice";
+
 figure; 
 % subplot(121);
-load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Validazione 2D\2d.mat'); 
-load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Validazione 2D\manuale.mat'); 
-load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto REAVER_Noi 30 img\dati reaver\1.mat');
+load(MOTHER_FOLDER+"\Validazione 2D\2d.mat"); 
+load(MOTHER_FOLDER+"\Validazione 2D\manuale.mat"); 
+load(MOTHER_FOLDER+"\Confronto REAVER_Noi 30 img\dati reaver\1.mat");
 histogram(mvn.branchdata.Rad,'FaceColor',blue,'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability','BinEdges',0:15:150);
 yticklabels(yticks*100);
 hold on
@@ -47,7 +51,7 @@ yticklabels(yticks/1000);
 legend('\muVES','Manual Analysis','REAVER total length','Location','northoutside');
 axis square
 %% rete2d+skeletro
-load('2d.mat');
+load(MOTHER_FOLDER+"\Validazione 2D\2d.mat"); 
 figure;
 imshow(cat(3,mvn.bw*0.7, zeros(size(mvn.bw)),zeros(size(mvn.bw))));
 set(gca,'Color',[0.2 0.2 0.2]);
@@ -60,7 +64,7 @@ scatter3(from(:,1),from(:,2),from(:,3),'filled','CData',[87 192 255]./255);
 scatter3(to(:,1),to(:,2),to(:,3),'filled','CData',[255 0 0]./255);
 
 %% rete3d_dws2+skeletro
-load('3d_dws2.mat');
+load(MOTHER_FOLDER+"\Da 2D a 3D\3ddws.mat");
 figure;
 p = patch(isosurface(mvn.bw));
 reducepatch(p,0.1)
@@ -87,7 +91,7 @@ ca.LineWidth = 1;
 title('Downsampled');
 view([-27 47]);
 %% rete3d+skeletro
-load('3d_dws1.mat');
+load(MOTHER_FOLDER+"\Da 2D a 3D\3d.mat");
 figure;
 p = patch(isosurface(mvn.bw));
 reducepatch(p,0.1)
@@ -119,7 +123,8 @@ orange = [0.8500, 0.3250, 0.0980];
 green = [0.4660, 0.6740, 0.1880];
 
 figure;
-subplot(231); load('2d.mat');
+subplot(231); 
+load(MOTHER_FOLDER+"\Da 2D a 3D\2d.mat");
 histogram(mvn.branchdata.Rad,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability');
 xline(mvn.mRad,'Color',[0.8500, 0.3250, 0.0980], 'LineWidth',1.5);
 xlabel('Radius [\mum]')
@@ -127,7 +132,7 @@ ylabel('Occurrences [%]')
 title(['R_{mean} = ' num2str(mvn.mRad) '\mum']);
 grid on
 subplot(232); 
-load('3d_dws2.mat');
+load(MOTHER_FOLDER+"\Da 2D a 3D\3ddws.mat");
 histogram(mvn.branchdata.Rad,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability');
 xline(mvn.mRad,'Color',[0.8500, 0.3250, 0.0980], 'LineWidth',1.5);
 xlabel('Radius [\mum]')
@@ -135,7 +140,7 @@ ylabel('Occurrences [%]')
 title(['R_{mean} = ' num2str(mvn.mRad) '\mum']);
 grid on
 subplot(233);
-load('3d_dws1.mat');
+load(MOTHER_FOLDER+"\Da 2D a 3D\3d.mat");
 histogram(mvn.branchdata.Rad,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability');
 xline(mvn.mRad,'Color',[0.8500, 0.3250, 0.0980], 'LineWidth',1.5);
 xlabel('Radius [\mum]')
@@ -144,7 +149,8 @@ title(['R_{mean} = ' num2str(mvn.mRad) '\mum']);
 grid on
 xlim([-10 100]);
 % figure
-subplot(234); load('2d.mat');
+subplot(234); 
+load(MOTHER_FOLDER+"\Da 2D a 3D\2d.mat");
 histogram(mvn.branchdata.Len,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability');
 xline(mvn.mLen,'Color',[0.8500, 0.3250, 0.0980], 'LineWidth',1.5);
 xlabel('Length [\mum]')
@@ -152,7 +158,7 @@ ylabel('Occurrences [%]')
 title(['L_{mean} = ' num2str(mvn.mLen) '\mum']);
 grid on
 subplot(235); 
-load('3d_dws2.mat');
+load(MOTHER_FOLDER+"\Da 2D a 3D\3ddws.mat");
 histogram(mvn.branchdata.Len,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability');
 xline(mvn.mLen,'Color',[0.8500, 0.3250, 0.0980], 'LineWidth',1.5);
 xlabel('Length [\mum]')
@@ -160,7 +166,7 @@ ylabel('Occurrences [%]')
 title(['L_{mean} = ' num2str(mvn.mLen) '\mum']);
 grid on
 subplot(236);
-load('3d_dws1.mat');
+load(MOTHER_FOLDER+"\Da 2D a 3D\3d.mat");
 histogram(mvn.branchdata.Len,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability');
 xline(mvn.mLen,'Color',[0.8500, 0.3250, 0.0980], 'LineWidth',1.5);
 xlabel('Length [\mum]')
@@ -168,11 +174,11 @@ ylabel('Occurrences [%]')
 title(['L_{mean} = ' num2str(mvn.mLen) '\mum']);
 grid on
 
-load('2d.mat');
+load(MOTHER_FOLDER+"\Da 2D a 3D\2d.mat");
 tab(1,1:4) = [mvn.mRad mvn.mLen mvn.mTort NaN];
-load('3d_dws2.mat');
+load(MOTHER_FOLDER+"\Da 2D a 3D\3ddws.mat");
 tab(2,1:4) = [mvn.mRad mvn.mLen mvn.mTort mvn.mEcc];
-load('3d_dws1.mat');
+load(MOTHER_FOLDER+"\Da 2D a 3D\3d.mat");
 tab(3,1:4) = [mvn.mRad mvn.mLen mvn.mTort mvn.mEcc];
 %% istogramma 3d DL vs AC (ramo per ramo)
 blue = [0, 0.4470, 0.7410];
@@ -189,7 +195,7 @@ load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto DL_AC
 histogram(mvn.branchdata.Len,'FaceColor',orange,'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability');
 addwhiskers(mean(mvn.branchdata.Len),std(mvn.branchdata.Len),orange);
 load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto DL_AC 30 img\1_DL.mat');
-addwhisker(mean(mvn.branchdata.Len),std(mvn.branchdata.Len),blue);
+addwhiskers(mean(mvn.branchdata.Len),std(mvn.branchdata.Len),blue);
 hold on
 % xline(mvn.mLen,'Color',orange, 'LineWidth',1.5);
 grid minor; axis square;
@@ -208,9 +214,9 @@ yticklabels(yticks*100);
 load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto DL_AC 30 img\1_AC.mat');
 histogram(mvn.branchdata.Rad,'FaceColor',orange,'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability',...
     'BinEdges',0:5:70);
-addwhisker(mean(mvn.branchdata.Rad),std(mvn.branchdata.Rad),orange);
+addwhiskers(mean(mvn.branchdata.Rad),std(mvn.branchdata.Rad),orange);
 load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto DL_AC 30 img\1_DL.mat');
-addwhisker(mean(mvn.branchdata.Rad),std(mvn.branchdata.Rad),blue);
+addwhiskers(mean(mvn.branchdata.Rad),std(mvn.branchdata.Rad),blue);
 hold on
 % xline(mvn.mRad,'Color',orange, 'LineWidth',1.5);
 grid minor; axis square;
@@ -218,7 +224,7 @@ legend('DL','AC');
 xlabel('Radius [\mum]');
 ylabel('Occurrences [%]');
 
-%% scatterplot diagonale lunghezza e raggio(confronto valori medi) 2D
+%% scatterplot diagonale lunghezza e raggio(confronto valori medi) 2D [SLOW]
 blue = [0, 0.4470, 0.7410];
 orange = [0.8500, 0.3250, 0.0980];
 green = [0.4660, 0.6740, 0.1880];
@@ -229,16 +235,16 @@ r_mu = zeros(1,30);
 l_re = zeros(1,30);
 l_mu = zeros(1,30);
 for i=1:30
-    load(strrep("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto REAVER_Noi 30 img\dati reaver\?.mat","?",string(i)));
+    load(strrep(MOTHER_FOLDER+"\Confronto REAVER_Noi 30 img\dati reaver\?.mat","?",string(i)));
     l_re(i) = metrics.vesselLength_CORR*1.59;
-    load(strrep("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto REAVER_Noi 30 img\?_rp1.mat","?",string(i)));
+    load(strrep(MOTHER_FOLDER+"\Confronto REAVER_Noi 30 img\?_rp1.mat","?",string(i)));
     r_mu_RE(i) = mvn.mRad_REAVER; l_mu(i) = sum(mvn.branchdata.Len); r_re(i) = metrics.meanVesselDiam/2*1.59; 
     r_mu1(i) = mvn.mRad;
-    load(strrep("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto REAVER_Noi 30 img\?_rp3.mat","?",string(i)));
+    load(strrep(MOTHER_FOLDER+"\Confronto REAVER_Noi 30 img\?_rp3.mat","?",string(i)));
     r_mu3(i) = mvn.mRad;
-%     load(strrep("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto REAVER_Noi 30 img\?_rp5.mat","?",string(i)));
+%     load(strrep(MOTHER_FOLDER+"\Confronto REAVER_Noi 30 img\?_rp5.mat","?",string(i)));
 %     r_mu5(i) = mvn.mRad;
-%     load(strrep("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto REAVER_Noi 30 img\?_rp10.mat","?",string(i)));
+%     load(strrep(MOTHER_FOLDER+"\Confronto REAVER_Noi 30 img\?_rp10.mat","?",string(i)));
 %     r_mu10(i) = mvn.mRad;
 end
 
@@ -281,7 +287,7 @@ grid minor; axis square; %axis square
 % xlim([min(l_re) max(l_mu)]);
 xlim([5 20]);
 title(strcat("RMSE = ",string(mean(sqrt((l_mu-l_re).^2))/1000), "mm"));
-%% scatterplot diagonale lunghezza e raggio(confronto valori medi) 3D
+%% scatterplot diagonale lunghezza e raggio(confronto valori medi) 3D [SLOW]
 blue = [0, 0.4470, 0.7410];
 orange = [0.8500, 0.3250, 0.0980];
 green = [0.4660, 0.6740, 0.1880];
@@ -290,9 +296,9 @@ r_ac = zeros(1,30);
 l_dl = zeros(1,30);
 l_ac = zeros(1,30);
 for i=1:30
-    load(strrep("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto DL_AC 30 img\?_DL.mat","?",string(i)));
+    load(strrep(MOTHER_FOLDER+"\Confronto DL_AC 30 img\?_DL.mat","?",string(i)));
     l_dl(i) = mvn.mLen; r_dl(i) = mvn.mRad;
-    load(strrep("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto DL_AC 30 img\?_AC.mat","?",string(i)));
+    load(strrep(MOTHER_FOLDER+"\Confronto DL_AC 30 img\?_AC.mat","?",string(i)));
     l_ac(i) = mvn.mLen; r_ac(i) = mvn.mRad;
 end
 
@@ -373,7 +379,7 @@ writetable(tabac,'tempi.xlsx','WriteMode','append');
 rad = [];
 len = [];
 for i=1:6
-    path = strrep("C:\Users\alber\Desktop\Stack2\Image0?_02.mat","?",string(i));
+    path = strrep(MOTHER_FOLDER+"\Stack_tumorale_ok\Image0?_02.mat","?",string(i));
     load(path);
     rad = cat(1,rad,mvn.mRad);
     len = cat(1,len,mvn.mLen);
@@ -391,7 +397,7 @@ xlabel("Distance to tumoral cell [mm]");
 %% MONTAGGIO 6 STACKS QUADRATI IN UN UNICA IMMAGINE LUNGA
 m = [];
 for i=1:6
-    path = strrep("C:\Users\alber\Desktop\Stack2\Image0?_02.mat","?",string(i));
+    path = strrep(MOTHER_FOLDER+"\Stack_tumorale_ok\Image0?_02.mat","?",string(i));
     load(path);
     m = cat(1,m,mat2gray(mvn.flat));
 end
@@ -401,7 +407,7 @@ imwrite(m,"C:\Users\alber\Desktop\mont.bmp");
 %% CALCOLO DELLA SUPERFICIE INTERPOLANTE (fare una volta sola, richiede tempo...)
 xv=[]; yv=[]; rv=[]; lv=[]; tv = []; ev = []; gv = [];
 for i=1:6
-    path = strrep("C:\Users\alber\Desktop\Stack2\Image0?_02.mat","?",string(i));
+    path = strrep(MOTHER_FOLDER+"\Stack_tumorale_ok\Image0?_02.mat","?",string(i));
     load(path);
     xv = cat(1,xv,(mvn.branchdata.From(:,1)+mvn.branchdata.To(:,1))/2);
     yv = cat(1,yv,(mvn.branchdata.From(:,2)+mvn.branchdata.To(:,2))/2+640*(i-1));
