@@ -38,7 +38,7 @@ stairs(ed(2:end),hl,'LineWidth',1,'Color',[0, 0.4470, 0.7410]);
 hold on
 [hl,ed] = histcounts(l_man,100);
 hl = cumsum(hl.*ed(2:end));
-sum(mvn.branchdata.Len);
+sum(mvn.branchdata.Len*1.7);
 stairs(ed(2:end),hl,'LineWidth',1,'Color',orange);
 grid on
 ylabel('Cumulative Length [mm]');
@@ -123,57 +123,65 @@ orange = [0.8500, 0.3250, 0.0980];
 green = [0.4660, 0.6740, 0.1880];
 
 figure;
-subplot(231); 
+ax1=subplot(321); 
 load(MOTHER_FOLDER+"\Da 2D a 3D\2d.mat");
-histogram(mvn.branchdata.Rad,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability');
-xline(mvn.mRad,'Color',[0.8500, 0.3250, 0.0980], 'LineWidth',1.5);
+histogram(mvn.branchdata.Rad,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability',...
+    'BinEdges',linspace(0,180,14));
+xline(mvn.mRad,'Color',orange, 'LineWidth',1.5);
 xlabel('Radius [\mum]')
 ylabel('Occurrences [%]')
-title(['R_{mean} = ' num2str(mvn.mRad) '\mum']);
+% title(['R_{mean} = ' num2str(mvn.mRad) '\mum']);    
 grid on
-subplot(232); 
+axis square
+ax3=subplot(323); 
 load(MOTHER_FOLDER+"\Da 2D a 3D\3ddws.mat");
-histogram(mvn.branchdata.Rad,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability');
-xline(mvn.mRad,'Color',[0.8500, 0.3250, 0.0980], 'LineWidth',1.5);
+histogram(mvn.branchdata.Rad,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability',...
+    'BinEdges',linspace(0,180,14));
+xline(mvn.mRad,'Color',orange, 'LineWidth',1.5);
 xlabel('Radius [\mum]')
 ylabel('Occurrences [%]')
-title(['R_{mean} = ' num2str(mvn.mRad) '\mum']);
+% title(['R_{mean} = ' num2str(mvn.mRad) '\mum']);
 grid on
-subplot(233);
+ax5=subplot(325);
 load(MOTHER_FOLDER+"\Da 2D a 3D\3d.mat");
-histogram(mvn.branchdata.Rad,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability');
-xline(mvn.mRad,'Color',[0.8500, 0.3250, 0.0980], 'LineWidth',1.5);
+histogram(mvn.branchdata.Rad,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability',...
+    'BinEdges',linspace(0,180,14));
+xline(mvn.mRad,'Color',orange, 'LineWidth',1.5);
 xlabel('Radius [\mum]')
 ylabel('Occurrences [%]')
-title(['R_{mean} = ' num2str(mvn.mRad) '\mum']);
+% title(['R_{mean} = ' num2str(mvn.mRad) '\mum']);
 grid on
 xlim([-10 100]);
 % figure
-subplot(234); 
+ax2=subplot(322); 
 load(MOTHER_FOLDER+"\Da 2D a 3D\2d.mat");
-histogram(mvn.branchdata.Len,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability');
-xline(mvn.mLen,'Color',[0.8500, 0.3250, 0.0980], 'LineWidth',1.5);
+histogram(mvn.branchdata.Len,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability',...
+    'BinEdges',linspace(0,500,14));
+xline(mvn.mLen,'Color',blue, 'LineWidth',1.5);
 xlabel('Length [\mum]')
 ylabel('Occurrences [%]')
-title(['L_{mean} = ' num2str(mvn.mLen) '\mum']);
+% title(['L_{mean} = ' num2str(mvn.mLen) '\mum']);
 grid on
-subplot(235); 
+ax4=subplot(324); 
 load(MOTHER_FOLDER+"\Da 2D a 3D\3ddws.mat");
-histogram(mvn.branchdata.Len,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability');
-xline(mvn.mLen,'Color',[0.8500, 0.3250, 0.0980], 'LineWidth',1.5);
+histogram(mvn.branchdata.Len,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability',...
+    'BinEdges',linspace(0,500,14));
+xline(mvn.mLen,'Color',blue, 'LineWidth',1.5);
 xlabel('Length [\mum]')
 ylabel('Occurrences [%]')
-title(['L_{mean} = ' num2str(mvn.mLen) '\mum']);
+% title(['L_{mean} = ' num2str(mvn.mLen) '\mum']);
 grid on
-subplot(236);
+ax6=subplot(326);
 load(MOTHER_FOLDER+"\Da 2D a 3D\3d.mat");
-histogram(mvn.branchdata.Len,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability');
-xline(mvn.mLen,'Color',[0.8500, 0.3250, 0.0980], 'LineWidth',1.5);
+histogram(mvn.branchdata.Len,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability',...
+    'BinEdges',linspace(0,500,14));
+xline(mvn.mLen,'Color',blue, 'LineWidth',1.5);
 xlabel('Length [\mum]')
 ylabel('Occurrences [%]')
-title(['L_{mean} = ' num2str(mvn.mLen) '\mum']);
+% title(['L_{mean} = ' num2str(mvn.mLen) '\mum']);
 grid on
-
+linkaxes([ax1,ax3,ax5],'x')
+linkaxes([ax2,ax4,ax6],'x')
 load(MOTHER_FOLDER+"\Da 2D a 3D\2d.mat");
 tab(1,1:4) = [mvn.mRad mvn.mLen mvn.mTort NaN];
 load(MOTHER_FOLDER+"\Da 2D a 3D\3ddws.mat");
@@ -186,7 +194,6 @@ orange = [0.8500, 0.3250, 0.0980];
 
 figure;
 subplot(121); 
-load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto DL_AC 30 img\1_DL.mat');
 histogram(mvn.branchdata.Len,'FaceColor',blue,'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability');
 yticklabels(yticks*100);
 hold on
@@ -198,7 +205,7 @@ load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto DL_AC
 addwhiskers(mean(mvn.branchdata.Len),std(mvn.branchdata.Len),blue);
 hold on
 % xline(mvn.mLen,'Color',orange, 'LineWidth',1.5);
-grid minor; axis square;
+grid minor; axis square;    
 legend('DL','AC');
 xlabel('Length [\mum]');
 ylabel('Occurrences [%]');
@@ -301,7 +308,7 @@ for i=1:30
     load(strrep(MOTHER_FOLDER+"\Confronto DL_AC 30 img\?_AC.mat","?",string(i)));
     l_ac(i) = mvn.mLen; r_ac(i) = mvn.mRad;
 end
-
+%%
 figure;
 subplot(121);
 plot([0,100],[0,100],'--','LineWidth',2,'Color',[0.7 0.7 0.7],'HandleVisibility','off');

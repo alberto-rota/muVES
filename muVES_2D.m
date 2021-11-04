@@ -543,12 +543,13 @@ for b=1:tot_branches
                 [~,skp] = min(abs(yslice-bp(2)));
             end
             truesec = floodimg(slice', [1 skp]);
+% UN-COMMENT PER VEDERE IN AZIONE IL CALCOL0 DEL RAGGIO
 %             figure;
 %             imagesc(bw);hold on;fplot(slicefun);
-%             figure; imagesc(slice'); figure; imagesc(truesec);
             truesec = truesec == 2;
             r(k) = sqrt((max(xslice(truesec))-min(xslice(truesec))).^2+...
                 (max(yslice(truesec))-min(yslice(truesec))).^2)/2;
+% UN-COMMENT PER VEDERE IN AZIONE IL CALCOL0 DEL RAGGIO
 %             fnplt(branchdata.Interp{b},'b',2);
 %             scatter(xslice(truesec),yslice(truesec),'.r');
 %             text(mean(xslice(truesec)),mean(yslice(truesec)),string(round(r(k))));
