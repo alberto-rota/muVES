@@ -479,7 +479,7 @@ errors = 0;
 % orizzontale o verticale e il numero di voxel adiacenti in diagonale. La
 % lunghezza in verticale/orizzontale è pari a 1 pixel, in diagonale planare
 % è pari a 1.41 pixel, in diagonale 3D è pari a 1.73 pixel.
-% figure; imagesc(bw); hold on; colormap gray;axis equal;
+figure; imagesc(bw); hold on; colormap gray;axis equal;
 for b=1:tot_branches
     % Di ogni voxel, viene calcolata la distanza con il successivo. Se la
     % distanza (al quadrato, per evitare di usare l'operazione di radice,
@@ -550,10 +550,10 @@ for b=1:tot_branches
             r(k) = sqrt((max(xslice(truesec))-min(xslice(truesec))).^2+...
                 (max(yslice(truesec))-min(yslice(truesec))).^2)/2;
 % UN-COMMENT PER VEDERE IN AZIONE IL CALCOL0 DEL RAGGIO
-%             fnplt(branchdata.Interp{b},'b',2);
-%             scatter(xslice(truesec),yslice(truesec),'.r');
+            fnplt(branchdata.Interp{b},'b',2);
+            scatter(xslice(truesec),yslice(truesec),'.r');
 %             text(mean(xslice(truesec)),mean(yslice(truesec)),string(round(r(k))));
-            close;
+%             close;
             if r(k)==0
                 r(k) = 1;
             end

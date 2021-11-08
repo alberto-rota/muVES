@@ -7,16 +7,18 @@ green = [0.4660, 0.6740, 0.1880];
 % !!!!!!!!!!!Cambiare questo path!!!!!!!!!!!!!!!!!
 MOTHER_FOLDER = "C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice";
 
-figure; 
+figure('Name','raggi_val2d','Position', [488 342 377.8000 420])
 % subplot(121);
 load(MOTHER_FOLDER+"\Validazione 2D\2d.mat"); 
 load(MOTHER_FOLDER+"\Validazione 2D\manuale.mat"); 
 load(MOTHER_FOLDER+"\Confronto REAVER_Noi 30 img\dati reaver\1.mat");
-histogram(mvn.branchdata.Rad,'FaceColor',blue,'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability','BinEdges',0:15:150);
+% r_man = rmoutliers(r_man);
+% r_man=r_man*1.59/1.98;
+histogram(rmoutliers(mvn.branchdata.Rad),'FaceColor',blue,'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability','BinEdges',0:15:150);
 yticklabels(yticks*100);
 hold on
 histogram(r_man,'FaceColor',[0.8500, 0.3250, 0.0980],'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability','BinEdges',0:15:150);
-addwhiskers(mean(mvn.branchdata.Rad),std(mvn.branchdata.Rad),'Color',blue,'LegendVisibility','off');
+addwhiskers(mean(rmoutliers(mvn.branchdata.Rad)),std(rmoutliers(mvn.branchdata.Rad)),'Color',blue,'LegendVisibility','off');
 addwhiskers(mean(r_man),std(r_man),'Color',[0.8500, 0.3250, 0.0980],'LegendVisibility','off');
 %xline(mvn.mRad,'Color',blue, 'LineWidth',1.5);
 hold on
@@ -30,7 +32,7 @@ ylabel('Occurrences [%]')
 legend('Mean Radius with \muVES','Mean manual Radius','Mean Radius with REAVER','Location','northoutside');
 axis square
 %% istogramma cumulative length
-figure
+figure('Name','length_val2d','Position', [488 342 377.8000 420])
 [hl,ed] = histcounts(mvn.branchdata.Len,100);
 hl = cumsum(hl.*ed(2:end));
 sum(mvn.branchdata.Len);
@@ -45,7 +47,7 @@ ylabel('Cumulative Length [mm]');
 xlabel('Branch Length [\mum]');
 yticklabels(yticks/1000);
 
- yline(metrics.vesselLength_CORR*1.59,'Color',green, 'LineWidth',1.5);
+yline(metrics.vesselLength_CORR*1.59,'Color',green, 'LineWidth',1.5);
 %  xline(sum(l_man),'Color',orange, 'LineWidth',1.5);
 % xline(metrics.vesselLength*1.59,'Color',green,'LineWidth',1.5);
 legend('\muVES','Manual Analysis','REAVER total length','Location','northoutside');
@@ -122,22 +124,23 @@ blue = [0, 0.4470, 0.7410];
 orange = [0.8500, 0.3250, 0.0980];
 green = [0.4660, 0.6740, 0.1880];
 
-figure;
+figure('Name','istogrammi_2d3d3ddws','Position', [369.8000 115.4000 658.4000 646.6000])
 ax1=subplot(321); 
 load(MOTHER_FOLDER+"\Da 2D a 3D\2d.mat");
-histogram(mvn.branchdata.Rad,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability',...
+histogram(rmoutliers(mvn.branchdata.Rad),'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability',...
     'BinEdges',linspace(0,180,14));
-xline(mvn.mRad,'Color',orange, 'LineWidth',1.5);
+addwhiskers(mean(rmoutliers(mvn.branchdata.Rad)), std(rmoutliers(mvn.branchdata.Rad)),'Color',orange);
+xline(mean(rmoutliers(mvn.branchdata.Rad)),'--','Color',orange,'LineWidth',1.2);
 xlabel('Radius [\mum]')
 ylabel('Occurrences [%]')
 % title(['R_{mean} = ' num2str(mvn.mRad) '\mum']);    
 grid on
-axis square
 ax3=subplot(323); 
 load(MOTHER_FOLDER+"\Da 2D a 3D\3ddws.mat");
 histogram(mvn.branchdata.Rad,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability',...
     'BinEdges',linspace(0,180,14));
-xline(mvn.mRad,'Color',orange, 'LineWidth',1.5);
+addwhiskers(mean(mvn.branchdata.Rad), std(mvn.branchdata.Rad),'Color',orange);
+xline(mvn.mRad,'--','Color',orange,'LineWidth',1.2);
 xlabel('Radius [\mum]')
 ylabel('Occurrences [%]')
 % title(['R_{mean} = ' num2str(mvn.mRad) '\mum']);
@@ -146,7 +149,8 @@ ax5=subplot(325);
 load(MOTHER_FOLDER+"\Da 2D a 3D\3d.mat");
 histogram(mvn.branchdata.Rad,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability',...
     'BinEdges',linspace(0,180,14));
-xline(mvn.mRad,'Color',orange, 'LineWidth',1.5);
+addwhiskers(mean(mvn.branchdata.Rad), std(mvn.branchdata.Rad),'Color',orange);
+xline(mvn.mRad,'--','Color',orange,'LineWidth',1.2);
 xlabel('Radius [\mum]')
 ylabel('Occurrences [%]')
 % title(['R_{mean} = ' num2str(mvn.mRad) '\mum']);
@@ -157,7 +161,8 @@ ax2=subplot(322);
 load(MOTHER_FOLDER+"\Da 2D a 3D\2d.mat");
 histogram(mvn.branchdata.Len,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability',...
     'BinEdges',linspace(0,500,14));
-xline(mvn.mLen,'Color',blue, 'LineWidth',1.5);
+addwhiskers(mean(rmoutliers(mvn.branchdata.Len)), std(rmoutliers(mvn.branchdata.Len)),'Color',blue);
+xline(mean(rmoutliers(mvn.branchdata.Len)),'--','Color',blue,'LineWidth',1.2);
 xlabel('Length [\mum]')
 ylabel('Occurrences [%]')
 % title(['L_{mean} = ' num2str(mvn.mLen) '\mum']);
@@ -166,7 +171,8 @@ ax4=subplot(324);
 load(MOTHER_FOLDER+"\Da 2D a 3D\3ddws.mat");
 histogram(mvn.branchdata.Len,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability',...
     'BinEdges',linspace(0,500,14));
-xline(mvn.mLen,'Color',blue, 'LineWidth',1.5);
+addwhiskers(mean(mvn.branchdata.Len), std(mvn.branchdata.Len),'Color',blue);
+xline(mvn.mLen,'--','Color',blue,'LineWidth',1.2);
 xlabel('Length [\mum]')
 ylabel('Occurrences [%]')
 % title(['L_{mean} = ' num2str(mvn.mLen) '\mum']);
@@ -175,7 +181,8 @@ ax6=subplot(326);
 load(MOTHER_FOLDER+"\Da 2D a 3D\3d.mat");
 histogram(mvn.branchdata.Len,'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability',...
     'BinEdges',linspace(0,500,14));
-xline(mvn.mLen,'Color',blue, 'LineWidth',1.5);
+addwhiskers(mean(mvn.branchdata.Len), std(mvn.branchdata.Len),'Color',blue);
+xline(mvn.mLen,'--','Color',blue,'LineWidth',1.2);
 xlabel('Length [\mum]')
 ylabel('Occurrences [%]')
 % title(['L_{mean} = ' num2str(mvn.mLen) '\mum']);
@@ -192,17 +199,18 @@ tab(3,1:4) = [mvn.mRad mvn.mLen mvn.mTort mvn.mEcc];
 blue = [0, 0.4470, 0.7410];
 orange = [0.8500, 0.3250, 0.0980];
 
-figure;
-subplot(121); 
+figure('Name','istogrammi_3ddlac','Position', [369.8000 115.4000 658.4000 646.6000])
 histogram(mvn.branchdata.Len,'FaceColor',blue,'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability');
 yticklabels(yticks*100);
 hold on
 % xline(mvn.mLen,'Color',blue, 'LineWidth',1.5);
 load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto DL_AC 30 img\1_AC.mat');
+mvnac=mvn;
 histogram(mvn.branchdata.Len,'FaceColor',orange,'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability');
-addwhiskers(mean(mvn.branchdata.Len),std(mvn.branchdata.Len),orange);
+addwhiskers(mean(mvn.branchdata.Len),std(mvn.branchdata.Len),'Color',orange);
 load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto DL_AC 30 img\1_DL.mat');
-addwhiskers(mean(mvn.branchdata.Len),std(mvn.branchdata.Len),blue);
+mvndl=mvn;
+addwhiskers(mean(mvn.branchdata.Len),std(mvn.branchdata.Len),'Color',blue);
 hold on
 % xline(mvn.mLen,'Color',orange, 'LineWidth',1.5);
 grid minor; axis square;    
@@ -212,7 +220,7 @@ ylabel('Occurrences [%]');
 
 
 load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto DL_AC 30 img\1_DL.mat');
-subplot(122); 
+figure('Name','istogrammi_3ddlac','Position', [369.8000 115.4000 658.4000 646.6000])
 histogram(mvn.branchdata.Rad,'FaceColor',blue,'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability',...
     'BinEdges',0:5:70);
 hold on
@@ -221,9 +229,9 @@ yticklabels(yticks*100);
 load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto DL_AC 30 img\1_AC.mat');
 histogram(mvn.branchdata.Rad,'FaceColor',orange,'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability',...
     'BinEdges',0:5:70);
-addwhiskers(mean(mvn.branchdata.Rad),std(mvn.branchdata.Rad),orange);
+addwhiskers(mean(mvn.branchdata.Rad),std(mvn.branchdata.Rad),'Color',orange);
 load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto DL_AC 30 img\1_DL.mat');
-addwhiskers(mean(mvn.branchdata.Rad),std(mvn.branchdata.Rad),blue);
+addwhiskers(mean(mvn.branchdata.Rad),std(mvn.branchdata.Rad),'Color',blue);
 hold on
 % xline(mvn.mRad,'Color',orange, 'LineWidth',1.5);
 grid minor; axis square;
@@ -255,8 +263,7 @@ for i=1:30
 %     r_mu10(i) = mvn.mRad;
 end
 
-figure;
-subplot(121);
+figure('Name','scatter_rag','Position', [488 342 377.8000 420])
 plot([0,100],[0,100],'--','LineWidth',2,'Color',[0.7 0.7 0.7],'HandleVisibility','off');
 hold on
 scatter((r_re),(r_mu1),'filled','MarkerFaceColor',blue,'MarkerFaceAlpha',0.8);
@@ -279,7 +286,7 @@ title(strcat("RMSE = ",string(mean(sqrt((r_mu1-r_re).^2))), "\mum"));
 legend('Branch average [RP = 1]','Branch average [RP = 3]','Length-Weighted average',...
     'Location','southeast');
 
-subplot(122);
+figure('Name','scatter_len','Position', [488 342 377.8000 420])
 plot([0,50000],[0,50000],'--','LineWidth',2,'Color',[0.7 0.7 0.7]);
 hold on
 scatter((l_re/1000),(l_mu/1000),'filled','MarkerFaceColor',blue,'MarkerFaceAlpha',0.8);
