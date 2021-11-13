@@ -124,7 +124,7 @@ blue = [0, 0.4470, 0.7410];
 orange = [0.8500, 0.3250, 0.0980];
 green = [0.4660, 0.6740, 0.1880];
 
-figure('Name','istogrammi_2d3d3ddws','Position', [369.8000 115.4000 658.4000 646.6000])
+figure('Name','istogrammi_2d3d3ddws','Position', [634.6000 115.4000 393.6000 372])
 ax1=subplot(321); 
 load(MOTHER_FOLDER+"\Da 2D a 3D\2d.mat");
 histogram(rmoutliers(mvn.branchdata.Rad),'FaceColor',[0.7 0.7 0.7],'LineWidth',1.5,'Normalization','Probability',...
@@ -199,18 +199,21 @@ tab(3,1:4) = [mvn.mRad mvn.mLen mvn.mTort mvn.mEcc];
 blue = [0, 0.4470, 0.7410];
 orange = [0.8500, 0.3250, 0.0980];
 
-figure('Name','istogrammi_3ddlac','Position', [369.8000 115.4000 658.4000 646.6000])
-histogram(mvn.branchdata.Len,'FaceColor',blue,'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability');
+load("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\DL e AC Senza downsampling\DL_nodws.mat");
+figure('Name','istogrammi_3ddlac','Position', [634.6000 115.4000 393.6000 372])
+histogram((mvn.branchdata.Len),'FaceColor',blue,'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability',...
+    'BinEdges',0:500/12:500);
 yticklabels(yticks*100);
 hold on
 % xline(mvn.mLen,'Color',blue, 'LineWidth',1.5);
-load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto DL_AC 30 img\1_AC.mat');
+load("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\DL e AC Senza downsampling\AC_nodws.mat");
 mvnac=mvn;
-histogram(mvn.branchdata.Len,'FaceColor',orange,'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability');
-addwhiskers(mean(mvn.branchdata.Len),std(mvn.branchdata.Len),'Color',orange);
-load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto DL_AC 30 img\1_DL.mat');
+histogram((mvn.branchdata.Len),'FaceColor',orange,'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability',...
+    'BinEdges',0:500/12:500);
+addwhiskers(mean(rmoutliers(mvn.branchdata.Len)),std(mvn.branchdata.Len),'Color',orange);
+load("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\DL e AC Senza downsampling\DL_nodws.mat");
 mvndl=mvn;
-addwhiskers(mean(mvn.branchdata.Len),std(mvn.branchdata.Len),'Color',blue);
+addwhiskers(mean((mvn.branchdata.Len)),std(mvn.branchdata.Len),'Color',blue);
 hold on
 % xline(mvn.mLen,'Color',orange, 'LineWidth',1.5);
 grid minor; axis square;    
@@ -219,26 +222,59 @@ xlabel('Length [\mum]');
 ylabel('Occurrences [%]');
 
 
-load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto DL_AC 30 img\1_DL.mat');
-figure('Name','istogrammi_3ddlac','Position', [369.8000 115.4000 658.4000 646.6000])
-histogram(mvn.branchdata.Rad,'FaceColor',blue,'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability',...
+load("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\DL e AC Senza downsampling\DL_nodws.mat");
+figure('Name','istogrammi_3ddlac','Position', [634.6000 115.4000 393.6000 372])
+histogram(rmoutliers(mvn.branchdata.Rad),'FaceColor',blue,'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability',...
     'BinEdges',0:5:70);
 hold on
 yticklabels(yticks*100);
 % xline(mvn.mRad,'Color',blue, 'LineWidth',1.5);
-load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto DL_AC 30 img\1_AC.mat');
-histogram(mvn.branchdata.Rad,'FaceColor',orange,'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability',...
+load("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\DL e AC Senza downsampling\AC_nodws.mat");
+histogram(rmoutliers(mvn.branchdata.Rad),'FaceColor',orange,'LineWidth',1.5,'HandleVisibility','on','Normalization','Probability',...
     'BinEdges',0:5:70);
-addwhiskers(mean(mvn.branchdata.Rad),std(mvn.branchdata.Rad),'Color',orange);
-load('C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\Confronto DL_AC 30 img\1_DL.mat');
-addwhiskers(mean(mvn.branchdata.Rad),std(mvn.branchdata.Rad),'Color',blue);
+addwhiskers(mean(rmoutliers(mvn.branchdata.Rad)),std(mvn.branchdata.Rad),'Color',orange);
+load("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\DL e AC Senza downsampling\DL_nodws.mat");
+addwhiskers(mean(rmoutliers(mvn.branchdata.Rad)),std(mvn.branchdata.Rad),'Color',blue);
 hold on
 % xline(mvn.mRad,'Color',orange, 'LineWidth',1.5);
 grid minor; axis square;
 legend('DL','AC');
 xlabel('Radius [\mum]');
 ylabel('Occurrences [%]');
+%% barplot tempi computazionali dl/ac
+load("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\DL e AC Senza downsampling\AC_nodws.mat")
+mvnac= mvn;
+load("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\DL e AC Senza downsampling\DL_nodws.mat")
+mvndl= mvn;
+load("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\DL e AC Senza downsampling\AC_dws.mat")
+mvnac2= mvn;
+load("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\DL e AC Senza downsampling\DL_dws.mat")
+mvndl2= mvn;
+figure('Name','barplot_chrono','Position', [169 440.2000 1.0608e+03 209.6000])
+cats = categorical(["DL","AC","DL (DF=2)","AC (DF=2)"]);
 
+times =[mvndl.info.chrono.Duration(4),...
+        mvndl.info.chrono.Duration(10),...
+        sum(mvndl.info.chrono.Duration([1:3,5:9,11]));
+        mvnac.info.chrono.Duration(5),...
+        mvnac.info.chrono.Duration(11),...
+        sum(mvnac.info.chrono.Duration([1:4,6:10,12]));
+        mvndl2.info.chrono.Duration(4),...
+        mvndl2.info.chrono.Duration(10),...
+        sum(mvndl2.info.chrono.Duration([1:3,5:9,11]));
+        mvnac2.info.chrono.Duration(5),...
+        mvnac2.info.chrono.Duration(11),...
+        sum(mvnac2.info.chrono.Duration([1:4,6:10,12]))];
+
+b = barh(cats,times,'stacked');
+barwidth=0.5;
+b(1).BarWidth = barwidth;
+green = [0.4660, 0.6740, 0.1880];
+b(3).FaceColor = green;
+xticks(0:50:1400)
+xlabel('Computational time [seconds]')
+legend('Segmentaion','Morphological Measurements','Others')
+grid on
 %% scatterplot diagonale lunghezza e raggio(confronto valori medi) 2D [SLOW]
 blue = [0, 0.4470, 0.7410];
 orange = [0.8500, 0.3250, 0.0980];
@@ -302,6 +338,8 @@ grid minor; axis square; %axis square
 xlim([5 20]);
 title(strcat("RMSE = ",string(mean(sqrt((l_mu-l_re).^2))/1000), "mm"));
 %% scatterplot diagonale lunghezza e raggio(confronto valori medi) 3D [SLOW]
+MOTHER_FOLDER = "C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice";
+figure()
 blue = [0, 0.4470, 0.7410];
 orange = [0.8500, 0.3250, 0.0980];
 green = [0.4660, 0.6740, 0.1880];
@@ -316,8 +354,7 @@ for i=1:30
     l_ac(i) = mvn.mLen; r_ac(i) = mvn.mRad;
 end
 %%
-figure;
-subplot(121);
+figure('Name','rag_dlac','Position', [634.6000 115.4000 393.6000 372])
 plot([0,100],[0,100],'--','LineWidth',2,'Color',[0.7 0.7 0.7],'HandleVisibility','off');
 hold on
 scatter((r_ac),(r_dl),'filled','MarkerFaceColor',blue,'MarkerFaceAlpha',0.8);
@@ -338,7 +375,7 @@ ylim([18 42]);
 title(strcat("RMSE = ",string(mean(sqrt((r_dl-r_ac).^2))), "\mum"));
 % legend('\muVES method','REAVER method');
 
-subplot(122);
+figure('Name','len_dlac','Position', [634.6000 115.4000 393.6000 372])
 plot([0,50000],[0,50000],'--','LineWidth',2,'Color',[0.7 0.7 0.7]);
 hold on
 scatter((l_dl),(l_ac),'filled','MarkerFaceColor',blue,'MarkerFaceAlpha',0.8);
