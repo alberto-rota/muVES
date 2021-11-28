@@ -202,24 +202,23 @@ clear V s slh newvol
 tic
 
 % INITIALIZING SEGMENTATION WITH DEEP LEARNING
-% load mVN_DLN;
+load mVN_DLN;
 if exist('mVN_DLN','var')
-%     vol = mat2gray(vol);
     disp("> Performing segmentation - Deep Learning ");
     
-    % The image is scaled to 384x384x16 to be best interfaced with the
+    % The image is scaled to 'rescfact' to be best interfaced with the
     % neural network. It will then be re-scaledo its original size after
-    % segmentation
-    
+    % segmentation (must be a multiple of 128x128x8)
+    % CHANGE THIS RESCALING ACCORDING TO COMPUTATIONAL POWER
     rescfact = [384 384 16];
     vres = imresize3(vol,rescfact);
     
     % Segmenting quadrants of dimension 128x128x8. The final segmentation
     % is the re-alignment of all these quadrants
     resultres = zeros(rescfact);
-    for i=0:128:(384-128)
-        for j=0:128:(384-128)
-            for k=[0 8]
+    for i=0:128:(rescfact(1)-128)
+        for j=0:128:(rescfact(2)-128)
+            for k=0:8:(rescfact(3)-8)
                 resultres((i+1):(i+128), (j+1):(j+128), (k+1):(k+8)) = ...
                     semanticseg(vres((i+1):(i+128), (j+1):(j+128), (k+1):(k+8)),mVN_DLN);
             end
