@@ -203,7 +203,7 @@ tic
 
 % INITIALIZING SEGMENTATION WITH DEEP LEARNING
 load mVN_DLN;
-if exist('mVN_DLN','var')
+if exist('mVN_DLN','var')   
     disp("> Performing segmentation - Deep Learning ");
     
     % The image is scaled to 'rescfact' to be best interfaced with the

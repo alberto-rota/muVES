@@ -1,9 +1,9 @@
 Pixel Density in the X direction    : 1.59
 Pixel Density in the Y direction    : 1.59
 Pixel Density in the Z direction    : 5
-Downsampling Factor                 : 2
+Downsampling Factor                 : 1
 Smoothing Repetitions               : 3
-Radius Precision                    : 3
+Radius Precision                    : 5
 Print PTS files [0 False/1 True]    : 0
 Points per Branch                   : 12
 Edge Border                         : 0.05

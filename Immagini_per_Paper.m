@@ -250,6 +250,9 @@ load("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\DL e AC Senza d
 mvnac2= mvn;
 load("C:\Users\alber\OneDrive - Politecnico di Milano\mVN_codice\DL e AC Senza downsampling\DL_dws.mat")
 mvndl2= mvn;
+%%
+mvnac = ac;
+mvndl = dl;
 figure('Name','barplot_chrono','Position', [169 440.2000 1.0608e+03 209.6000])
 cats = categorical(["DL","AC","DL (DF=2)","AC (DF=2)"]);
 
