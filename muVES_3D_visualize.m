@@ -22,7 +22,7 @@ if flat_img
 end
 %% SLICE VIEWER
 if slices
-    sliceViewer(vol);
+    sliceViewer(mvn.bw);
 end
 %% SEGMENTATION
 if segmentation
