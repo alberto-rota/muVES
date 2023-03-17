@@ -547,8 +547,12 @@ for b=1:tot_branches
 %             figure;
 %             imagesc(bw);hold on;fplot(slicefun);
             truesec = truesec == 2;
-            r(k) = sqrt((max(xslice(truesec))-min(xslice(truesec))).^2+...
+            if nnz(truesec)>0
+             r(k) = sqrt((max(xslice(truesec))-min(xslice(truesec))).^2+...
                 (max(yslice(truesec))-min(yslice(truesec))).^2)/2;
+            else
+                r(k) = 1;
+            end
 % UN-COMMENT PER VEDERE IN AZIONE IL CALCOL0 DEL RAGGIO
             fnplt(branchdata.Interp{b},'b',2);
             scatter(xslice(truesec),yslice(truesec),'.r');
