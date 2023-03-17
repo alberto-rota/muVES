@@ -119,7 +119,7 @@ if tortuosity
     figure('Name','Tortuosity branch-wise')
     cm = colormap(jet);
     for b = 1:tot_branches
-        currcolor_idx = 1+round((mvn.branchdata.Tort(b)-min(mvn.branchdata.Tort(:)))...
+        currcolor_idx = 1+round((mvn.branchdata.Tort_new(b)-min(mvn.branchdata.Tort_new(:)))...
             /max(mvn.branchdata.Tort(:))*255);
         plot3(mvn.branchdata.xPath{b}, mvn.branchdata.yPath{b}, mvn.branchdata.zPath{b},...
             'Color', cm(currcolor_idx,:),'LineWidth',3);
@@ -130,7 +130,7 @@ if tortuosity
             'filled','MarkerFaceColor', [1 1 1]);
     end
     hold off
-    set(gca,'CLim',[min(mvn.branchdata.Tort(:)) max(mvn.branchdata.Tort(:))]);
+    set(gca,'CLim',[min(mvn.branchdata.Tort_new(:)) max(mvn.branchdata.Tort_new(:))]);
     set(gca,'Color',[0.2 0.2 0.2]);
     colorbar
     title('Tortuosity');
@@ -178,6 +178,28 @@ if lengthh
     set(gca,'Color',[0.2 0.2 0.2]);
     colorbar;
     title('Length');
+    daspect([1 1 1]);
+    view(3);
+end
+%% ECCENTRICITY
+if eccentricity
+    figure('Name','Eccenticity branch-wise');
+    cool = colormap(jet);
+    for b = 1:tot_branches
+        currcolor_idx = ceil(mvn.branchdata.Eccent(b)/max(mvn.branchdata.Eccent(:))*256);
+        plot3(mvn.branchdata.xPath{b}, mvn.branchdata.yPath{b}, mvn.branchdata.zPath{b},...
+            'Color', cool(currcolor_idx,:),'LineWidth',3);
+        hold on
+        scatter3(mvn.branchdata.From(b,1), mvn.branchdata.From(b,2), mvn.branchdata.From(b,3),'o',...
+            'filled','MarkerFaceColor', [1 1 1]);
+        scatter3(mvn.branchdata.To(b,1), mvn.branchdata.To(b,2), mvn.branchdata.To(b,3),'o',...
+            'filled','MarkerFaceColor', [1 1 1]);
+    end
+    hold off
+    set(gca,'CLim',[min(mvn.branchdata.Eccent(:)) max(mvn.branchdata.Eccent(:))]);
+    set(gca,'Color',[0.2 0.2 0.2]);
+    colorbar;
+    title('Eccentricity');
     daspect([1 1 1]);
     view(3);
 end

@@ -21,7 +21,8 @@ graph                 = 0;
 histograms            = 0;
 radius                = 0;
 lengthh               = 0;
-tortuosity            = 0;
+tortuosity            = 1;
+eccentricity          = 1;
 pts_classification    = 0;
 %==========================================================================%
 if numel(size(mvn.bw))==3

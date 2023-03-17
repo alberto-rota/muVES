@@ -21,8 +21,8 @@ if nargin == 0
 % correct, a window for file selection will be opened.
 % Example:      pathtoimg = 'C:\...\...\myfolder\myfile';
 %               extension = '.oib';
-pathtoimg = "C:\Users\alber\Documents\MATLAB\muVES-main\mosaic";
-extension = ".tif";
+pathtoimg = "C:\Users\alber\Documents\MATLAB\Networks OIB\GFP_marked\1";
+extension = ".oib";
 else
     splpath = strsplit(varargin{1},".");
     pathtoimg = splpath(1);
@@ -112,7 +112,7 @@ try
     pathtoimg = splpath(1);
     extension = strcat(".",splpath(2));
 catch
-    error('Invalid path or unreadable file');
+    error('Invalid path or unreadable file');   
 end
 % ========================================================================%
 % SPECIFY HERE THE ADDITIONAL OPERATION THAT HAVE TO BE PERFORMED FOR
