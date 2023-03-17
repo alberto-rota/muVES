@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # µVES
 ###
 *Algorithm to analyze 2D and 3D images of microvascular networks (Politecnico di Milano)*
@@ -120,6 +119,3 @@ Analyzing flowrate
 Flowrate in each vessels can be computed by defining pressure BC (inlet pressure). 
 Outlet pressure is equal to 0. Simmetry condition is defined as null flow rate.
 Define the BC in the script, and run it. Choose the .mat file resulting from the previous anlysis.
-
-
->>>>>>> e5632e705127717d94e1b73ad68a3a77438d72aa
