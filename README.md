@@ -30,7 +30,7 @@ From the raw microscopy data, muVES outputs a the segmented network, its skeleto
 <td> <img src=readme\graph.png width=300> </td>
 <!-- <td> <img src=readme\orange.png width=300> </td> -->
 </tr>
-<td align=center> Radius map </td>
+<!-- <td align=center> Radius map </td> -->
 <td align=center> Length map </td>
 <td align=center> Tortuosity map </td>
 <td align=center> Eccentricity map </td>
@@ -43,7 +43,10 @@ From the raw microscopy data, muVES outputs a the segmented network, its skeleto
 </tr>
 </table>
 
--------------------------------------------------------
+***
+A guide on how to use μVES is provided at [this repo's wiki](wiki)
+
+<!-- -------------------------------------------------------
 Software requirements
 -------------------------------------------------------
 µVES has been tested on Matlab2020a.
@@ -86,4 +89,4 @@ Analyzing flowrate
 -------------------------------------------------------
 Flowrate in each vessels can be computed by defining pressure BC (inlet pressure). 
 Outlet pressure is equal to 0. Simmetry condition is defined as null flow rate.
-Define the BC in the script, and run it. Choose the .mat file resulting from the previous anlysis.
+Define the BC in the script, and run it. Choose the .mat file resulting from the previous anlysis. -->
