@@ -43,9 +43,6 @@ From the raw microscopy data, muVES outputs a the segmented network, its skeleto
 </tr>
 </table>
 
-This flowchart shows the main steps of the algorithm:
-![flowchart](readme/flowchart.png)
-
 -------------------------------------------------------
 Software requirements
 -------------------------------------------------------
