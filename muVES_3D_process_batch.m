@@ -2,7 +2,7 @@
 % Copyrights © 2021     Alberto Rota, Luca Possenti
 %
 % For informations please contact:
-%   alberto2.rota@mail.polimi.it
+%   alberto1.rota@polimi.it
 %   or alberto_rota@outlook.com
 %   luca.possenti@mail.polimi.it
 % ========================================================================%
