@@ -21,7 +21,7 @@ if nargin == 0
 % correct, a window for file selection will be opened.
 % Example:      pathtoimg = 'C:\...\...\myfolder\myfile';
 %               extension = '.oib';
-pathtoimg = "C:\Users\alber\Documents\MATLAB\Networks OIB\GFP_marked\1";
+pathtoimg = "";
 extension = ".oib";
 else
     splpath = strsplit(varargin{1},".");

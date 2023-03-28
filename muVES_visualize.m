@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 % =============================== µVES ================================== %
 % Copyrights © 2021     Alberto Rota, Luca Possenti
 %
@@ -13,24 +12,24 @@
 load(strcat(path,name));
 %==========================================================================%
 % Set to 1 the visualizations that you want to be shown, 0 otherwise
-flat_img              = 0;  
-slices                = 0;  % --> Only for 3D data
+flat_img              = 1;  
+slices                = 1;  % --> Only for 3D data
 segmentation          = 1;  % --> Segmentation and Skeletonization are on 
 skeleton              = 1;  %     the same image for 2D data, set either to
-interpolation         = 0;  %     1 and both will bw shown
-graph                 = 0;
-histograms            = 0;
-radius                = 0;
-lengthh               = 0;
+interpolation         = 1;  %     1 and both will bw shown
+graph                 = 1;
+histograms            = 1;
+radius                = 1;
+lengthh               = 1;
 tortuosity            = 1;
 eccentricity          = 1;
-pts_classification    = 0;
+pts_classification    = 1;
 %==========================================================================%
 if numel(size(mvn.bw))==3
     muVES_3D_visualize()
 else
     muVES_2D_visualize()
-=======
+end
 % =============================== µVES ================================== %
 % Copyrights © 2021     Alberto Rota, Luca Possenti
 %
@@ -61,5 +60,4 @@ if numel(size(mvn.bw))==3
     muVES_3D_visualize()
 else
     muVES_2D_visualize()
->>>>>>> e5632e705127717d94e1b73ad68a3a77438d72aa
 end
