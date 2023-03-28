@@ -44,7 +44,8 @@ From the raw microscopy data, muVES outputs a the segmented network, its skeleto
 </table>
 
 ***
-A guide on how to use μVES is provided at [this repo's wiki](wiki)
+## How to use μVES
+A detailed illustrated guide on how to use μVES is provided at [this repo's wiki](https://github.com/alberto-rota/muVES/wiki)
 
 <!-- -------------------------------------------------------
 Software requirements
