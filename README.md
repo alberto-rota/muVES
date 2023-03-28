@@ -18,18 +18,28 @@ From the raw microscopy data, muVES outputs a the segmented network, its skeleto
 
 <table>
 <tr>
-<td> <img src=readme\projection.png width=300> </td>
-<td> <img src=readme\segmentation.png” width=300> </td>
-<td> <img src=readme\skeleton.png” width=300> </td>
-<td> <img src=readme\graph.png” width=300> </td>
-<!-- <td> <img src=readme\orange.png” width=300> </td> -->
+<td align=center> 2D Projection </td>
+<td align=center> Segmentation </td>
+<td align=center> Skeletonization </td>
+<td align=center> Connectivity </td>
 </tr>
 <tr>
-<td> <img src=readme\radius.png” width=300 > </td>
-<td> <img src=readme\lenght.png” width=300> </td>
-<td> <img src=readme\tortuosity.png” width=300> </td>
-<td> <img src=readme\eccentricity.png” width=300> </td>
-<td> <img src=readme\hists.png” width=300> </td>
+<td> <img src=readme\projection.png width=300> </td>
+<td> <img src=readme\segmentation.png width=300> </td>
+<td> <img src=readme\skeleton.png width=300> </td>
+<td> <img src=readme\graph.png width=300> </td>
+<!-- <td> <img src=readme\orange.png width=300> </td> -->
+</tr>
+<td align=center> Radius map </td>
+<td align=center> Length map </td>
+<td align=center> Tortuosity map </td>
+<td align=center> Eccentricity map </td>
+<tr>
+<td> <img src=readme\radius.png width=300 > </td>
+<td> <img src=readme\lenght.png width=300> </td>
+<td> <img src=readme\tortuosity.png width=300> </td>
+<td> <img src=readme\eccentricity.png width=300> </td>
+<!-- <td> <img src=readme\hists.png width=300> </td> -->
 </tr>
 </table>
 
