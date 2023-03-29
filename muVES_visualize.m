@@ -4,7 +4,7 @@
 % For informations please contact:
 %   alberto1.rota@polimi.it
 %   or alberto_rota@outlook.com
-%   luca.possenti@mail.polimi.it
+%   luca.possenti@polimi.it
 % ========================================================================%
 %% VISUALIZATION TOOL FOR MICROVASCULAR NETWORKS ANALYZED WITH muVES
 % Press "Run" to choose which network to visualize. 
@@ -36,7 +36,7 @@ end
 % For informations please contact:
 %   alberto1.rota@polimi.it
 %   or alberto_rota@outlook.com
-%   luca.possenti@mail.polimi.it
+%   luca.possenti@polimi.it
 % ========================================================================%
 %% VISUALIZATION TOOL FOR MICROVASCULAR NETWORKS ANALYZED WITH muVES
 % Press "Run" to choose which network to visualize. 

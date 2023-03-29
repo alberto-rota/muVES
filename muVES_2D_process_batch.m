@@ -4,7 +4,7 @@
 % For informations please contact:
 %   alberto1.rota@polimi.it
 %   or alberto_rota@outlook.com
-%   luca.possenti@mail.polimi.it
+%   luca.possenti@polimi.it
 % ========================================================================%
 %% ANALYZE IMAGE BATCH - 2D
 if ispc
