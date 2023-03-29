@@ -1,11 +1,10 @@
 # µVES
 ###
-*Algorithm to analyze 2D and 3D images of microvascular networks (Politecnico di Milano)*
+*Algorithm to analyze the morphology and topology of 2D and 3D images of microvascular networks (Politecnico di Milano)*
 
 **Active contributors**: Alberto Rota
 
 **Supervisor**: Luca Possenti
-
 
 **Copyright**: Alberto Rota, Luca Possenti
 
@@ -44,8 +43,31 @@ From the raw microscopy data, muVES outputs a the segmented network, its skeleto
 </table>
 
 ***
+## μVES 2D
+μVES was designed to analyze 3D images of microvascular networks. However, its features have been adapted to work with 2D images as well. 
+
+The 2D version of this algorithm outputs the same information as the 3D version, with the exception of:
+- Z coordinates are never present
+- Vessel Eccentricities cannot be calculated
+- The lateral area is only estimated, assuming perfectly circular cross sections
+
+***
+
 ## How to use μVES
-A detailed illustrated guide on how to use μVES is provided at [this repo's wiki](https://github.com/alberto-rota/muVES/wiki)
+A detailed illustrated guide on how to use μVES, including software requirements and dependencies, is provided at [this repo's wiki](https://github.com/alberto-rota/muVES/wiki)
+
+<p align="left"> 
+<a href="https://github.com/alberto-rota/muVES/wiki">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="readme/wikibutton_light.png">
+  <img style="vertical-align:middle" alt="NEARLab" src="readme/wikibutton_dark.png" width="200" > 
+</picture>
+</a> </p>
+
+***
+## How to cite μVES
+If you use μVES in your research, please cite the following paper:
+*Publication pending*
 
 <!-- -------------------------------------------------------
 Software requirements
