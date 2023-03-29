@@ -20,8 +20,8 @@ if nargin == 0
 % correct, a window for file selection will be opened.
 % Example:      pathtoimg = 'C:\...\...\myfolder\myfile';
 %               extension = '.oib';
-pathtoimg = "C:\Users\alber\Documents\MATLAB\muVES-main\mosaic2D";
-extension = ".tif";
+pathtoimg = "C:\Users\alber\Documents\MATLAB\muVES\Test Images\Test2D";
+extension = ".bmp";
 
     try
         img = imread(strcat(pathtoimg,extension));
@@ -168,7 +168,7 @@ disp("> Enhancing the image and performing binarization ");
 img_mf = medfilt2(img, [10 10]);  % Median filtering
 gamma = 0.5;
 img_en = imadjust(img_mf, [0;1], [0;1], gamma); % Dark pixel contrast enhancement
-bw = imbinarize(img_en,0.5); %bw = medfilt2(bw, [5 5]);% Removes salt&pepper 
+bw = imbinarize(img_en); %bw = medfilt2(bw, [5 5]);% Removes salt&pepper 
 bw = bwmorph(bw,'spur');
 bw = bwmorph(bw,'clean');
 bw = imgaussfilt(double(bw),5);
@@ -480,7 +480,7 @@ errors = 0;
 % lunghezza in verticale/orizzontale è pari a 1 pixel, in diagonale planare
 % è pari a 1.41 pixel, in diagonale 3D è pari a 1.73 pixel.
 figure; imagesc(bw); hold on; colormap gray;axis equal;
-if nnz(truesec)>0for b=1:tot_branches
+for b=1:tot_branches
     % Di ogni voxel, viene calcolata la distanza con il successivo. Se la
     % distanza (al quadrato, per evitare di usare l'operazione di radice,
     % richiede molta potenza di calcolo. Non ci cambia niente) è pari a 1
@@ -689,12 +689,12 @@ mvn.areaFrac = nnz(bw)/(numel(bw));
 mvn.approxAlat = sum(branchdata.Alat(:),'omitnan');
 mvn.realAlat = realAlat*pxdens(1)^2*downfactor^2;
 mvn.S_over_V = mvn.realAlat/(numel(bw)*pxdens(1)^3*downfactor^3);
-mvn.numSubN = numsn;
-for i = 1:numsn
-    if nnz(mvn.skel.graph.Nodes.subN == i) == 1
-        mvn.numSubN = mvn.numSubN - 1;
-    end
-end
+% mvn.numSubN = numsn;
+% for i = 1:numsn
+%     if nnz(mvn.skel.graph.Nodes.subN == i) == 1
+%         mvn.numSubN = mvn.numSubN - 1;
+%     end
+% end
 
 % Viene creata la struct 'info'
 mvn.info.name = pathtoimg;
