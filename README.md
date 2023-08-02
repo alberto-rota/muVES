@@ -67,7 +67,21 @@ A detailed illustrated guide on how to use μVES, including software requirement
 ***
 ## How to cite μVES
 If you use μVES in your research, please cite the following paper:
-*Publication pending*
+
+```
+@article{rota2023muves,
+author = {Rota, Alberto and Possenti, Luca and Offeddu, Giovanni S. and Senesi, Martina and Stucchi, Adelaide and Venturelli, Irene and Rancati, Tiziana and Zunino, Paolo and Kamm, Roger D. and Costantino, Maria Laura},
+title = {A three-dimensional method for morphological analysis and flow velocity estimation in microvasculature on-a-chip},
+journal = {Bioengineering \& Translational Medicine},
+volume = {n/a},
+number = {n/a},
+pages = {e10557},
+keywords = {3D computational analysis, deep learning, network morphology, segmentation, vasculature-on-a-chip},
+doi = {https://doi.org/10.1002/btm2.10557},
+url = {https://aiche.onlinelibrary.wiley.com/doi/abs/10.1002/btm2.10557},
+}
+
+```
 
 <!-- -------------------------------------------------------
 Software requirements
