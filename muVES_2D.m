@@ -20,7 +20,7 @@ if nargin == 0
 % correct, a window for file selection will be opened.
 % Example:      pathtoimg = 'C:\...\...\myfolder\myfile';
 %               extension = '.oib';
-pathtoimg = "C:\Users\alber\Documents\MATLAB\muVES\Test Images\Test2D";
+pathtoimg = "C:\Users\alber\Documents\MATLAB\muVES\Test Images\muvesbug";
 extension = ".bmp";
 
     try
@@ -31,7 +31,7 @@ extension = ".bmp";
         splpath = strsplit(path,".");
         pathtoimg = splpath(1);
         extension = strcat(".",splpath(2));
-end
+    end
 else
     splpath = strsplit(varargin{1},".");
     pathtoimg = splpath(1);
@@ -440,11 +440,10 @@ disp("> Interpolating the branches ");
                 branchdata.CatFr(cond) == "MIX" & branchdata.CatTo(cond) == "MIX"| ...
                 branchdata.CatFr(cond) == "INT" & branchdata.CatTo(cond) == "INT") ...
                 && numel(idxx) > 0
-            changeable = find(branchdata.CatFr == "MIX" & cond);
-            branchdata(cond,:) = [];
+            branchdata(branchdata.CatFr == "MIX" & cond,:) = [];
         end
     end
-    tot_branches = size(branchdata,1);
+% %     tot_branches = size(branchdata,1);
  end
  sk = zeros(h,w);
  for i=1:tot_branches
@@ -479,7 +478,7 @@ errors = 0;
 % orizzontale o verticale e il numero di voxel adiacenti in diagonale. La
 % lunghezza in verticale/orizzontale è pari a 1 pixel, in diagonale planare
 % è pari a 1.41 pixel, in diagonale 3D è pari a 1.73 pixel.
-figure; imagesc(bw); hold on; colormap gray;axis equal;
+% figure; imagesc(bw); hold on; colormap gray;axis equal;
 for b=1:tot_branches
     % Di ogni voxel, viene calcolata la distanza con il successivo. Se la
     % distanza (al quadrato, per evitare di usare l'operazione di radice,
@@ -554,8 +553,8 @@ for b=1:tot_branches
                 r(k) = 1;
             end
 % UN-COMMENT PER VEDERE IN AZIONE IL CALCOL0 DEL RAGGIO
-            fnplt(branchdata.Interp{b},'b',2);
-            scatter(xslice(truesec),yslice(truesec),'.r');
+%             fnplt(branchdata.Interp{b},'b',2);
+%             scatter(xslice(truesec),yslice(truesec),'.r');
 %             text(mean(xslice(truesec)),mean(yslice(truesec)),string(round(r(k))));
 %             close;
             if r(k)==0
@@ -593,8 +592,8 @@ try
 catch
 end
 
-clear currcolor_idx dist_to_next xs ys zs sl geo truesec area skp normal...
-    basep nextp intp tmax i j k
+% clear currcolor_idx dist_to_next xs ys zs sl geo truesec area skp normal...
+%     basep nextp intp tmax i j k
 
 %
 
