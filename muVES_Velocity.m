@@ -22,14 +22,24 @@ load(strcat(path,name));
 mu = 1e-3; %[Pa * s]
 
 %% Retrieving BC (p = pressure, q = flow rate (totQ), s = symmetry, o = outlet)
-zone1.type = 'o';
-zone1.value = 0;
+% zone1.type = 'p';
+% zone1.value = 50;
+% zone2.type = 's';
+% zone2.value = 0;
+% zone3.type = 'o';
+% zone3.value = 50;
+% zone4.type = 's';
+% zone4.value = 0;
+
+zone1.type = 'p';
+zone1.value = 50;
 zone2.type = 's';
-zone2.value = 0;
-zone3.type = 'p';
+zone2.value = 5;
+zone3.type = 'o';
 zone3.value = 50;
 zone4.type = 's';
 zone4.value = 0;
+
 BC = [zone1 zone2 zone3 zone4];
 
 
@@ -64,7 +74,12 @@ end
 totalVessels = size(mvn.branchdata,1);
 resistance = sparse(totalVessels);
 for b=1:totalVessels
-    resistance(b,b) = 8 * mu * mvn.branchdata.Len(b) / (pi * mvn.branchdata.Rad(b)^4);
+    if mvn.branchdata.Rad(b) ==0
+        warning('A zero radius has been detected in the vascular network. Radius has been substitued with 1 um.')
+        resistance(b,b) = 8 * mu * mvn.branchdata.Len(b) / (pi * (1)^4);
+    else
+        resistance(b,b) = 8 * mu * mvn.branchdata.Len(b) / (pi * mvn.branchdata.Rad(b)^4);
+    end
 end
 
 %% Plotting
@@ -149,6 +164,11 @@ pressure=X(1:end-totalVessels); %Pa
 
 %% Computing velocity
 radius = mvn.branchdata.Rad;
+if nnz(radius)~=length(radius)
+    %warning already done before
+    mask = radius==0;
+    radius(mask) = 1;
+end
 velocities = flowrate./(pi.*radius.^2); %um/s
 
 %% Plotting
