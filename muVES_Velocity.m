@@ -77,6 +77,9 @@ for b=1:totalVessels
     if mvn.branchdata.Rad(b) ==0
         warning('A zero radius has been detected in the vascular network. Radius has been substitued with 1 um.')
         resistance(b,b) = 8 * mu * mvn.branchdata.Len(b) / (pi * (1)^4);
+    elseif isnan(mvn.branchdata.Rad(b))
+        warning('A nan radius has been detected in the vascular network. Radius has been substitued with 1 um.')
+        resistance(b,b) = 8 * mu * mvn.branchdata.Len(b) / (pi * (1)^4);
     else
         resistance(b,b) = 8 * mu * mvn.branchdata.Len(b) / (pi * mvn.branchdata.Rad(b)^4);
     end
