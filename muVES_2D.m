@@ -19,9 +19,9 @@ if nargin == 0
 % in 'extension'. If those fields are left empty ('') or if the path is not
 % correct, a window for file selection will be opened.
 % Example:      pathtoimg = 'C:\...\...\myfolder\myfile';
-%               extension = '.oib';
-pathtoimg = "C:\Users\alber\Documents\MATLAB\muVES\Test Images\muvesbug";
-extension = ".bmp";
+%               extension = '.oib'; 
+pathtoimg = "";
+extension = ".tif";
 
     try
         img = imread(strcat(pathtoimg,extension));
@@ -117,7 +117,7 @@ switch extension
     case {'.oib', '.n2d', '.tif'}
         pathtoimg = char(pathtoimg);
         disp(strcat("Processing: ",string(pathtoimg)));
-        try
+%         try
 %-------------------------------------------------------------------------%
 % Melissa Linkert, Curtis T. Rueden, Chris Allan, Jean-Marie Burel, 
 % Will Moore, Andrew Patterson, Brian Loranger, Josh Moore, Carlos Neves,
@@ -133,9 +133,9 @@ switch extension
             extension = strcat(".",splpath(2));
             img = mat2gray(max(img, [], 3));
             mvn.info.hashtable = string(img_3d{1,2});
-        catch
-            error('Path Invalido o il file non è nel formato corretto');
-        end
+%         catch
+%             error('Path Invalido o il file non è nel formato corretto');
+%         end
     case {'.bmp'}
         img = imread(strcat(pathtoimg,extension));
         img = img(:,:,1);
@@ -170,7 +170,7 @@ gamma = 0.5;
 img_en = imadjust(img_mf, [0;1], [0;1], gamma); % Dark pixel contrast enhancement
 bw = imbinarize(img_en); %bw = medfilt2(bw, [5 5]);% Removes salt&pepper 
 bw = bwmorph(bw,'spur');
-bw = bwmorph(bw,'clean');
+bw = bwmorph(bw,'clean')
 bw = imgaussfilt(double(bw),5);
 bw = imbinarize(bw,0.5);
 mvn.bw = bw;
@@ -320,7 +320,6 @@ disp("> Interpolating the branches ");
     % Estrazione delle coordinate dei punti di start e end di ogni branches
     s = branchdata.From;
     e = branchdata.To;
-
     
     % Ogni nodo dello scheletro viene categorizzato con la condizione opportuna
     % per la simulazione fluidodinamica:
@@ -446,7 +445,7 @@ disp("> Interpolating the branches ");
 % %     tot_branches = size(branchdata,1);
  end
  sk = zeros(h,w);
- for i=1:tot_branches
+ for i=1:size(branchdata,1)
      for j=1:numel(branchdata.xPath{i})
          sk(branchdata.xPath{i}(j),branchdata.yPath{i}(j)) = 1;
      end
