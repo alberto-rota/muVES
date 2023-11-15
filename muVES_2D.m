@@ -117,7 +117,7 @@ switch extension
     case {'.oib', '.n2d', '.tif', '.tiff'}
         pathtoimg = char(pathtoimg);
         disp(strcat("Processing: ",string(pathtoimg)));
-%         try
+        try
 %-------------------------------------------------------------------------%
 % Melissa Linkert, Curtis T. Rueden, Chris Allan, Jean-Marie Burel, 
 % Will Moore, Andrew Patterson, Brian Loranger, Josh Moore, Carlos Neves,
@@ -133,9 +133,9 @@ switch extension
             extension = strcat(".",splpath(2));
             img = mat2gray(max(img, [], 3));
             mvn.info.hashtable = string(img_3d{1,2});
-%         catch
-%             error('Path Invalido o il file non è nel formato corretto');
-%         end
+        catch
+            error('Path Invalido o il file non è nel formato corretto');
+        end
     case {'.bmp'}
         img = imread(strcat(pathtoimg,extension));
         img = img(:,:,1);
@@ -170,7 +170,7 @@ gamma = 0.5;
 img_en = imadjust(img_mf, [0;1], [0;1], gamma); % Dark pixel contrast enhancement
 bw = imbinarize(img_en); %bw = medfilt2(bw, [5 5]);% Removes salt&pepper 
 bw = bwmorph(bw,'spur');
-bw = bwmorph(bw,'clean')
+bw = bwmorph(bw,'clean');
 bw = imgaussfilt(double(bw),5);
 bw = imbinarize(bw,0.5);
 mvn.bw = bw;
@@ -478,7 +478,8 @@ errors = 0;
 % lunghezza in verticale/orizzontale è pari a 1 pixel, in diagonale planare
 % è pari a 1.41 pixel, in diagonale 3D è pari a 1.73 pixel.
 % figure; imagesc(bw); hold on; colormap gray;axis equal;
-for b=1:tot_branches
+for b=1:size(branchdata,1)
+
     % Di ogni voxel, viene calcolata la distanza con il successivo. Se la
     % distanza (al quadrato, per evitare di usare l'operazione di radice,
     % richiede molta potenza di calcolo. Non ci cambia niente) è pari a 1
@@ -573,7 +574,7 @@ for b=1:tot_branches
     branchdata.check(b) = branchdata.Len(b) > branchdata.Rad(b)*3;
     
     fprintf(repmat('\b',1,displine))
-    displine = fprintf(strcat(string(b),"/",string(tot_branches)," branches analyzed"));
+    displine = fprintf(strcat(string(b),"/",string(size(branchdata,1))," branches analyzed"));
 end
 fprintf(repmat('\b',1,displine))
 % Scalamento delle metriche in funzione della densità in pixel e del
@@ -619,7 +620,7 @@ fprintf(FID,'BEGIN_LIST\n');
 s = branchdata.From;
 e = branchdata.To;
 
-for i = 1 : tot_branches
+for i = 1 : size(branchdata,1)
     % Vengono considerati nella simulazione solamente rami con lunghezza
     % superiore ad una soglia impostata dall'utente nella prima sezione
     % dello script
@@ -654,7 +655,7 @@ fprintf(FID,'BEGIN_LIST\n');
 % Anche il valore del raggio deve essere normalizzato della la stessa
 % quantità per cui erano stati normalizzate le coordinate dei punti dello
 % scheletro
-for i= 1:tot_branches
+for i= 1:size(branchdata,1)
     fprintf(FID,'%f\n', r(i)/max([w,h])/mean(pxdens(1)/pxdens(2))*downfactor);
 end
 fprintf(FID,'END_LIST\n');
